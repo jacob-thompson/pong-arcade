@@ -6,6 +6,11 @@ class Player:
 
         self.score = 0
 
+        if self.id == 1:
+            self.goal_line = 0, 0, 0, screenh
+        else:
+            self.goal_line = screenw, 0, screenw, screenh
+
         paddle_size = pw, ph = 10, 50
         distance_from_edge = ph >> 1
         default_y = screenh >> 1

@@ -24,7 +24,6 @@ class Pong:
 
     def set_window_properties(self):
         pygame.display.set_caption("Pong")
-
         icon = pygame.image.load("resources/icon.png")
         pygame.display.set_icon(icon)
 
@@ -32,15 +31,26 @@ class Pong:
         print("\nPong - Jacob Alexander Thompson")
         print("https://github.com/jacob-thompson/Pong")
 
-
     def handle(self, event):
         if event.type == pygame.QUIT: exit()
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE: exit()
 
+    def check_for_score(self):
+        if self.ball.rect.clipline(self.p1.goal_line) != ():
+            self.p2.score += 1
+            self.ball.reset_position()
+            self.ball.reset_velocity()
+
+        if self.ball.rect.clipline(self.p2.goal_line) != ():
+            self.p1.score += 1
+            self.ball.reset_position()
+            self.ball.reset_velocity()
+
     def update_ball_position(self):
-        print("updating ball position...")
+        self.check_for_score()
+        self.ball.move(self.p1.paddle, self.p2.paddle)
 
     def draw_background(self):
         self.surface.fill(self.bg_color)
