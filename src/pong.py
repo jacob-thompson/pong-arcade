@@ -28,6 +28,11 @@ class Pong:
         icon = pygame.image.load("resources/icon.png")
         pygame.display.set_icon(icon)
 
+    def print_help_info(self):
+        print("\nPong - Jacob Alexander Thompson")
+        print("https://github.com/jacob-thompson/Pong")
+
+
     def handle(self, event):
         if event.type == pygame.QUIT: exit()
 
@@ -69,6 +74,13 @@ class Pong:
     def draw_paddles(self):
         pygame.draw.rect(self.surface, self.p1.color, self.p1.paddle)
         pygame.draw.rect(self.surface, self.p2.color, self.p2.paddle)
+
+    def draw_frame(self):
+        self.draw_background()
+        self.draw_center_line()
+        self.draw_ball()
+        self.draw_scores()
+        self.draw_paddles()
 
     def update_frame(self):
         pygame.display.flip()

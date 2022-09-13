@@ -5,7 +5,9 @@ from pygame import event as ev
 
 def main():
     pong = p.Pong()
+
     pong.set_window_properties()
+    pong.print_help_info()
 
     while 1:
         for event in ev.get():
@@ -13,11 +15,7 @@ def main():
 
         #pong.update_ball_position()
 
-        pong.draw_background()
-        pong.draw_center_line()
-        pong.draw_ball()
-        pong.draw_scores()
-        pong.draw_paddles()
+        pong.draw_frame()
         pong.update_frame()
 
 if __name__ == "__main__":
