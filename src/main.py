@@ -2,10 +2,8 @@ import pong as p
 
 from pygame import event as ev
 
-
 def main():
     pong = p.Pong()
-
     pong.set_window_properties()
     pong.print_help_info()
 
