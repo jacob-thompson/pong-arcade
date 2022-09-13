@@ -28,8 +28,7 @@ class Pong:
         pygame.display.set_icon(icon)
 
     def print_help_info(self):
-        print("\nPong - Jacob Alexander Thompson")
-        print("https://github.com/jacob-thompson/Pong")
+        print("Pong -- https://github.com/jacob-thompson/Pong")
 
     def handle(self, event):
         if event.type == pygame.QUIT: exit()
