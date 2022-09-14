@@ -47,6 +47,17 @@ class Pong:
             self.ball.reset_position()
             self.ball.reset_velocity()
 
+    def update_paddle_position(self):
+        keys = pygame.key.get_pressed()
+
+        within_top_bound = self.p1.paddle.y >= 0
+        within_bot_bound = self.p1.paddle.y <= self.height - self.p1.paddle.height
+
+        if keys[pygame.K_w] and self.p1.within_top_bound():
+            self.p1.paddle.y -= 1
+        if keys[pygame.K_s] and self.p1.within_bot_bound():
+            self.p1.paddle.y += 1
+
     def update_ball_position(self):
         self.check_for_score()
         self.ball.move(self.p1.paddle, self.p2.paddle)

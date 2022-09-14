@@ -11,6 +11,7 @@ def main():
         for event in ev.get():
             pong.handle(event)
 
+        pong.update_paddle_position()
         pong.update_ball_position()
 
         pong.draw_frame()
