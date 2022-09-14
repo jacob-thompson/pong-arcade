@@ -11,17 +11,13 @@ class Ball:
 
         self.default_rate = 8
         self.default_speed = 1
-
-        self.x_frames_per_move = self.default_rate
-        self.x_frames_until_move = self.x_frames_per_move
+        self.frames_per_move = self.default_rate
+        self.frames_until_move = self.frames_per_move
         self.x_diff = self.default_speed
-
-        self.y_frames_per_move = self.default_rate
-        self.y_frames_until_move = self.y_frames_per_move
         self.y_diff = 0
 
-        self.top_edge = 0, 0, screenw, 0
-        self.bot_edge = 0, screenh, screenw, screenh
+        self.top_edge_line = 0, 0, screenw, 0
+        self.bot_edge_line = 0, screenh, screenw, screenh
 
     def reset_position(self):
         self.rect.x = self.default_x
@@ -37,9 +33,9 @@ class Ball:
         self.y_diff = 0
 
     def bouce_off_edges(self):
-        if self.rect.clipline(self.top_edge) != ():
+        if self.rect.clipline(self.top_edge_line) != ():
             self.y_diff = -self.y_diff
-        if self.rect.clipline(self.bot_edge) != ():
+        if self.rect.clipline(self.bot_edge_line) != ():
             self.y_diff = -self.y_diff
 
     def bounce_off_paddles(self, paddle1, paddle2):
@@ -48,22 +44,20 @@ class Ball:
         if self.rect.colliderect(paddle2):
             self.x_diff = -self.x_diff
 
-    def shift_horizontal(self):
+    def shift_pos_horizontal(self):
         self.rect.x += self.x_diff
-        self.x_frames_until_move = self.x_frames_per_move
 
-    def shift_vertical(self):
+    def shift_pos_vertical(self):
         self.rect.y += self.y_diff
-        self.y_frames_until_move = self.y_frames_per_move
 
     def move(self, paddle1, paddle2):
-        self.x_frames_until_move -= 1
-        self.y_frames_until_move -= 1
+        self.frames_until_move -= 1
 
-        if self.x_frames_until_move <= 0:
+        if self.frames_until_move <= 0:
             self.bounce_off_paddles(paddle1, paddle2)
-            self.shift_horizontal()
+            self.shift_pos_horizontal()
 
-        if self.y_frames_until_move <= 0:
             self.bouce_off_edges()
-            self.shift_vertical()
+            self.shift_pos_vertical()
+
+            self.frames_until_move = self.frames_per_move
