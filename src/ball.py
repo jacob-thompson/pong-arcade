@@ -9,7 +9,7 @@ class Ball:
         ball_size = scale, scale
         self.rect = Rect(self.default_ball_pos, ball_size)
 
-        self.default_rate = 3
+        self.default_rate = 8
         self.default_speed = 1
 
         self.x_frames_per_move = self.default_rate
@@ -44,12 +44,9 @@ class Ball:
             self.y_diff = -self.y_diff
 
     def bounce_off_paddles(self, paddle1, paddle2):
-        p1_edge = paddle1.topright, paddle1.bottomright
-        p2_edge = paddle2.topleft, paddle2.bottomleft
-
-        if self.rect.clipline(p1_edge) != ():
+        if self.rect.colliderect(paddle1):
             self.x_diff = -self.x_diff
-        if self.rect.clipline(p2_edge) != ():
+        if self.rect.colliderect(paddle2):
             self.x_diff = -self.x_diff
 
     def shift_horizontal(self):
@@ -68,7 +65,9 @@ class Ball:
         self.bounce_off_paddles(paddle1, paddle2)
 
         if self.x_frames_until_move <= 0:
+            self.bounce_off_paddles(paddle1, paddle2)
             self.shift_horizontal()
 
         if self.y_frames_until_move <= 0:
+            self.bouce_off_edges()
             self.shift_vertical()
