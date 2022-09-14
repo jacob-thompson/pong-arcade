@@ -39,7 +39,6 @@ class Ball:
     def bouce_off_edges(self):
         if self.rect.clipline(self.top_edge) != ():
             self.y_diff = -self.y_diff
-
         if self.rect.clipline(self.bot_edge) != ():
             self.y_diff = -self.y_diff
 
@@ -60,9 +59,6 @@ class Ball:
     def move(self, paddle1, paddle2):
         self.x_frames_until_move -= 1
         self.y_frames_until_move -= 1
-
-        self.bouce_off_edges()
-        self.bounce_off_paddles(paddle1, paddle2)
 
         if self.x_frames_until_move <= 0:
             self.bounce_off_paddles(paddle1, paddle2)
