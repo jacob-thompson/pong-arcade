@@ -33,7 +33,7 @@ class Ball:
         self.reset_movement()
 
     def increase_speed(self):
-        if abs(self.x_diff) < self.rect.width:
+        if abs(self.x_diff) < self.rect.w:
             if self.x_diff > 0: self.x_diff += 1
             else: self.x_diff -= 1
 
@@ -45,31 +45,27 @@ class Ball:
 
     def get_collide_point(self, paddle):
         collision_rect = self.rect.clip(paddle)
-        point = collision_rect.y + (collision_rect.height >> 1)
+        point = collision_rect.y + (collision_rect.h >> 1)
 
         return point
 
     def set_trajectory(self, paddle):
-        upward = self.y_diff < 0
-        downward = self.y_diff > 0
-        forward = self.y_diff == 0
-
-        # paddle height is 50
-        outer_top = range(paddle.y, paddle.y + 10)
-        inner_top = range(paddle.y + 11, paddle.y + 20)
-        center = range(paddle.y + 21, paddle.y + 30)
-        inner_bot = range(paddle.y + 31, paddle.y + 40)
-        outer_bot = range(paddle.y + 41, paddle.y + 50)
+        psubd = paddle.h // 5
+        outer_top = range(paddle.y, paddle.y + psubd)
+        inner_top = range(paddle.y + psubd + 1, paddle.y + (psubd * 2))
+        center = range(paddle.y + (psubd * 2) + 1, paddle.y + (psubd * 3))
+        inner_bot = range(paddle.y + (psubd * 3) + 1, paddle.y + (psubd * 4))
+        outer_bot = range(paddle.y + (psubd * 4) + 1, paddle.y + paddle.h)
 
         collide_point = self.get_collide_point(paddle)
         trajectory = 0
 
         if collide_point in outer_top:
             trajectory = 2
-            if forward: trajectory = -trajectory
+            if self.y_diff == 0: trajectory = -trajectory
         elif collide_point in inner_top:
             trajectory = 1
-            if forward: trajectory = -trajectory
+            if self.y_diff == 0: trajectory = -trajectory
         elif collide_point in center:
             trajectory = 0
         elif collide_point in inner_bot:
@@ -77,7 +73,7 @@ class Ball:
         elif collide_point in outer_bot:
             trajectory = 2
 
-        if upward: trajectory = -trajectory
+        if self.y_diff < 0: trajectory = -trajectory
 
         self.y_diff = trajectory
 
@@ -92,14 +88,14 @@ class Ball:
             self.increase_speed()
             self.flip_direction_horizontal()
 
-            self.rect.x = paddle1.x + paddle1.width + 1
+            self.rect.x = paddle1.x + paddle1.w + 1
 
             self.set_trajectory(paddle1)
         if self.rect.colliderect(paddle2):
             self.increase_speed()
             self.flip_direction_horizontal()
 
-            self.rect.x = paddle2.x - paddle2.width - 1
+            self.rect.x = paddle2.x - paddle2.w - 1
 
             self.set_trajectory(paddle2)
 

@@ -31,4 +31,4 @@ class Player:
         return self.paddle.y >= 0
 
     def within_bot_bound(self):
-        return self.paddle.y <= self.screenh - self.paddle.height
+        return self.paddle.y <= self.screenh - self.paddle.h
