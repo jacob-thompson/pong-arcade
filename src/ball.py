@@ -9,12 +9,12 @@ class Ball:
         ball_size = scale, scale
         self.rect = Rect(self.default_ball_pos, ball_size)
 
-        self.default_rate = 8
-        self.default_speed = 1
-        self.frames_per_move = self.default_rate
-        self.frames_until_move = self.frames_per_move
+        self.default_speed = 3
         self.x_diff = self.default_speed
         self.y_diff = 0
+
+        self.rate = 5
+        self.frames_until_move = self.rate
 
         self.top_edge_line = 0, 0, screenw, 0
         self.bot_edge_line = 0, screenh, screenw, screenh
@@ -24,13 +24,14 @@ class Ball:
         self.rect.y = self.default_y
 
     def reset_velocity(self):
-        self.x_frames_per_move = self.default_rate
-        self.x_frames_until_move = self.x_frames_per_move
         self.x_diff = self.default_speed
-
-        self.y_frames_per_move = self.default_rate
-        self.y_frames_until_move = self.y_frames_per_move
         self.y_diff = 0
+        self.frames_until_move = self.rate
+
+    def increase_speed(self):
+        if abs(self.x_diff) < self.rect.width:
+            if self.x_diff > 0: self.x_diff += 1
+            else: self.x_diff -= 1
 
     def bouce_off_edges(self):
         if self.rect.clipline(self.top_edge_line) != ():
@@ -41,8 +42,10 @@ class Ball:
     def bounce_off_paddles(self, paddle1, paddle2):
         if self.rect.colliderect(paddle1):
             self.x_diff = -self.x_diff
+            self.increase_speed()
         if self.rect.colliderect(paddle2):
             self.x_diff = -self.x_diff
+            self.increase_speed()
 
     def shift_pos_horizontal(self):
         self.rect.x += self.x_diff
@@ -60,4 +63,4 @@ class Ball:
             self.bouce_off_edges()
             self.shift_pos_vertical()
 
-            self.frames_until_move = self.frames_per_move
+            self.frames_until_move = self.rate
