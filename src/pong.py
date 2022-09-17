@@ -39,13 +39,11 @@ class Pong:
     def check_for_score(self):
         if self.ball.rect.clipline(self.p1.goal_line) != ():
             self.p2.score += 1
-            self.ball.reset_position()
-            self.ball.reset_velocity()
+            self.ball.reset()
 
         if self.ball.rect.clipline(self.p2.goal_line) != ():
             self.p1.score += 1
-            self.ball.reset_position()
-            self.ball.reset_velocity()
+            self.ball.reset()
 
     def update_paddle_position(self):
         keys = pygame.key.get_pressed()
