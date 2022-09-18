@@ -1,7 +1,11 @@
 from pygame import Rect
 
 class Ball:
-    def __init__(self, scale, screenw, screenh):
+    def __init__(self):
+        scale = 10
+        screenw = 800
+        screenh = 600
+
         self.default_x = (screenw >> 1) + scale
         self.default_y = screenh >> 1
         self.default_ball_pos = self.default_x, self.default_y
@@ -43,7 +47,7 @@ class Ball:
     def flip_direction_vertical(self):
         self.y_diff = -self.y_diff
 
-    def get_collide_point(self, paddle):
+    def get_collision_point(self, paddle):
         collision_rect = self.rect.clip(paddle)
         point = collision_rect.y + (collision_rect.h >> 1)
 
@@ -57,20 +61,20 @@ class Ball:
         inner_bot = range(paddle.y + (psubd * 3) + 1, paddle.y + (psubd * 4))
         outer_bot = range(paddle.y + (psubd * 4) + 1, paddle.y + paddle.h)
 
-        collide_point = self.get_collide_point(paddle)
+        collision_point = self.get_collision_point(paddle)
         trajectory = 0
 
-        if collide_point in outer_top:
+        if collision_point in outer_top:
             trajectory = 2
             if self.y_diff == 0: trajectory = -trajectory
-        elif collide_point in inner_top:
+        elif collision_point in inner_top:
             trajectory = 1
             if self.y_diff == 0: trajectory = -trajectory
-        elif collide_point in center:
+        elif collision_point in center:
             trajectory = 0
-        elif collide_point in inner_bot:
+        elif collision_point in inner_bot:
             trajectory = 1
-        elif collide_point in outer_bot:
+        elif collision_point in outer_bot:
             trajectory = 2
         else:
             trajectory = 3
