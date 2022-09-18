@@ -27,8 +27,12 @@ class Player:
 
             self.color = 255, 0, 0
 
-    def within_top_bound(self):
-        return self.paddle.y >= 0
+    def in_bound_top(self):
+        defect = 15
 
-    def within_bot_bound(self):
-        return self.paddle.y <= self.screenh - self.paddle.h
+        return self.paddle.y >= defect
+
+    def in_bound_bot(self):
+        defect = 15
+
+        return self.paddle.y <= self.screenh - self.paddle.h - defect

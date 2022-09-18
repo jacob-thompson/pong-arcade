@@ -48,10 +48,22 @@ class Pong:
     def update_paddle_position(self):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_w] and self.p1.within_top_bound():
+        if keys[pygame.K_w] and self.p1.in_bound_top():
             self.p1.paddle.y -= 1
-        if keys[pygame.K_s] and self.p1.within_bot_bound():
+        if keys[pygame.K_s] and self.p1.in_bound_bot():
             self.p1.paddle.y += 1
+
+        one_player = self.p2.id == 0
+
+        if keys[pygame.K_UP] and self.p1.in_bound_top() and one_player:
+            self.p1.paddle.y -= 1
+        elif keys[pygame.K_UP] and self.p2.in_bound_top():
+            self.p2.paddle.y -= 1
+
+        if keys[pygame.K_DOWN] and self.p1.in_bound_bot() and one_player:
+            self.p1.paddle.y += 1
+        elif keys[pygame.K_DOWN] and self.p2.in_bound_bot():
+            self.p2.paddle.y += 1
 
     def update_ball_position(self):
         self.check_for_score()
