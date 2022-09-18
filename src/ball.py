@@ -9,7 +9,7 @@ class Ball:
         ball_size = scale, scale
         self.rect = Rect(self.default_ball_pos, ball_size)
 
-        self.default_speed = 3
+        self.default_speed = 2
         self.x_diff = self.default_speed
         self.y_diff = 0
 
@@ -72,6 +72,8 @@ class Ball:
             trajectory = 1
         elif collide_point in outer_bot:
             trajectory = 2
+        else:
+            trajectory = 3
 
         if self.y_diff < 0: trajectory = -trajectory
 
@@ -80,6 +82,7 @@ class Ball:
     def bounce_off_edges(self):
         if self.rect.clipline(self.top_edge_line) != ():
             self.flip_direction_vertical()
+
         if self.rect.clipline(self.bot_edge_line) != ():
             self.flip_direction_vertical()
 
@@ -91,6 +94,7 @@ class Ball:
             self.rect.x = paddle1.x + paddle1.w + 1
 
             self.set_trajectory(paddle1)
+
         if self.rect.colliderect(paddle2):
             self.increase_speed()
             self.flip_direction_horizontal()
