@@ -10,7 +10,6 @@ class Player:
         self.score = 0
         self.winner = False
 
-        self.goal_line = 0, 0, 0, 0
         self.paddle = Rect(0, 0, 0, 0)
         self.color = 0, 0, 0
 
@@ -36,18 +35,14 @@ class Player:
             paddle_pos = self.screenw - distance_from_edge - pw, default_y
             self.paddle = Rect(paddle_pos, paddle_size)
 
-    def set_goal_pos(self):
-        if self.id == 1:
-            self.goal_line = 0, 0, 0, self.screenh
-        else:
-            self.goal_line = self.screenw, 0, self.screenw, self.screenh
+    def ensure_in_bound_top(self):
+        defect = 25
 
-    def in_bound_top(self):
-        defect = 15
+        if self.paddle.y < defect:
+            self.paddle.y = defect
 
-        return self.paddle.y >= defect
+    def ensure_in_bound_bot(self):
+        defect = 25
 
-    def in_bound_bot(self):
-        defect = 15
-
-        return self.paddle.y <= self.screenh - self.paddle.h - defect
+        if self.paddle.y > self.screenh - self.paddle.h - defect:
+            self.paddle.y = self.screenh - self.paddle.h - defect

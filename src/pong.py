@@ -31,6 +31,8 @@ class Pong:
 
         self.mouse_pos = pygame.mouse.get_pos()
 
+        self.clock = pygame.time.Clock()
+
         self.sound_paddle = pygame.mixer.Sound("resources/audible/paddle.wav")
         self.sound_wall = pygame.mixer.Sound("resources/audible/wall.wav")
         self.sound_score = pygame.mixer.Sound("resources/audible/score.wav")
@@ -55,11 +57,9 @@ class Pong:
     def start_new_game(self):
         self.show_menu = False
 
-        self.p1.set_goal_pos()
         self.p1.set_paddle_pos()
         self.p1.set_color()
 
-        self.p2.set_goal_pos()
         self.p2.set_paddle_pos()
         self.p2.set_color()
 
@@ -120,21 +120,17 @@ class Pong:
         player.winner = True
 
         self.show_menu = True
+        pygame.mouse.set_visible(True)
 
     def check_for_winner(self, player):
         if player.score >= 10:
             self.give_victory(player)
 
     def check_for_score(self):
-        if self.ball.rect.clipline(self.p1.goal_line) != ():
-            self.p2.score += 1
-            self.ball.reset()
+        p1_score = self.ball.rect.right >= self.screenw
+        p2_score = self.ball.rect.left <= 0
 
-            self.sound_score.play()
-
-            self.check_for_winner(self.p2)
-
-        if self.ball.rect.clipline(self.p2.goal_line) != ():
+        if p1_score:
             self.p1.score += 1
             self.ball.reset()
 
@@ -142,47 +138,65 @@ class Pong:
 
             self.check_for_winner(self.p1)
 
+        if p2_score:
+            self.p2.score += 1
+            self.ball.reset()
+
+            self.sound_score.play()
+
+            self.check_for_winner(self.p2)
+
+    def tick(self, frame_rate):
+        self.clock.tick(frame_rate)
+
+    def ensure_boundaries(self):
+        self.p1.ensure_in_bound_bot()
+        self.p1.ensure_in_bound_top()
+
+        self.p2.ensure_in_bound_bot()
+        self.p2.ensure_in_bound_top()
+
     def ai_paddle_movement(self):
-        if self.ball.x_diff < 0: return
+        if self.ball.x_diff < 0:
+            speed = 2
+        else:
+            speed = 6
 
-        self.frames_until_ai_move -= 1
+        can_move_up = self.ball.rect.top < self.p2.paddle.top
+        can_move_down = self.ball.rect.bottom > self.p2.paddle.bottom
 
-        ball_point = self.ball.rect.centery
-        can_move_up = self.p2.paddle.centery > ball_point and self.p2.in_bound_top()
-        can_move_down = self.p2.paddle.centery < ball_point and self.p2.in_bound_bot()
-
-        if can_move_down and self.frames_until_ai_move <= 0:
-            self.p2.paddle.y += 1
-
-            self.frames_until_ai_move = self.ai_move_rate
-        elif can_move_up and self.frames_until_ai_move <= 0:
-            self.p2.paddle.y -= 1
-
-            self.frames_until_ai_move = self.ai_move_rate
+        if can_move_up:
+            self.p2.paddle.y -= speed
+        elif can_move_down:
+            self.p2.paddle.y += speed
 
     def update_paddle_position(self):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_w] and self.p1.in_bound_top():
-            self.p1.paddle.y -= 1
+        speed = 10
 
-        if keys[pygame.K_s] and self.p1.in_bound_bot():
-            self.p1.paddle.y += 1
+        if keys[pygame.K_w]:
+            self.p1.paddle.y -= speed
+
+        if keys[pygame.K_s]:
+            self.p1.paddle.y += speed
 
         one_player = self.p2.id == 0
 
-        if keys[pygame.K_UP] and self.p1.in_bound_top() and one_player:
-            self.p1.paddle.y -= 1
-        elif keys[pygame.K_UP] and self.p2.in_bound_top():
-            self.p2.paddle.y -= 1
+        if keys[pygame.K_UP] and one_player:
+            self.p1.paddle.y -= speed
+        elif keys[pygame.K_UP]:
+            self.p2.paddle.y -= speed
 
-        if keys[pygame.K_DOWN] and self.p1.in_bound_bot() and one_player:
-            self.p1.paddle.y += 1
-        elif keys[pygame.K_DOWN] and self.p2.in_bound_bot():
-            self.p2.paddle.y += 1
+        if keys[pygame.K_DOWN] and one_player:
+            self.p1.paddle.y += speed
+        elif keys[pygame.K_DOWN]:
+            self.p2.paddle.y += speed
 
         if one_player:
             self.ai_paddle_movement()
+
+        self.ensure_boundaries()
 
     def update_ball_position(self):
         self.check_for_score()

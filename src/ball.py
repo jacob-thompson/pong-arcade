@@ -1,5 +1,7 @@
 from pygame import Rect
 
+from random import randint
+
 class Ball:
     def __init__(self):
         screenw = 800
@@ -12,12 +14,9 @@ class Ball:
         ball_size = 10, 10
         self.rect = Rect(self.default_ball_pos, ball_size)
 
-        self.default_speed = 2
+        self.default_speed = 6
         self.x_diff = self.default_speed
         self.y_diff = 0
-
-        self.rate = 5
-        self.frames_until_move = self.rate
 
         self.top_edge_line = 0, 0, screenw, 0
         self.bot_edge_line = 0, screenh, screenw, screenh
@@ -32,7 +31,6 @@ class Ball:
     def reset_movement(self):
         self.x_diff = self.default_speed
         self.y_diff = 0
-        self.frames_until_move = self.rate
 
     def reset_flags(self):
         self.bflag_edge = False
@@ -44,7 +42,7 @@ class Ball:
         self.reset_flags()
 
     def increase_speed(self):
-        if abs(self.x_diff) < self.rect.w:
+        if abs(self.x_diff) < self.rect.w << 1:
             if self.x_diff > 0: self.x_diff += 1
             else: self.x_diff -= 1
 
@@ -60,6 +58,9 @@ class Ball:
 
         return point
 
+    def coin_flip(self):
+        return randint(1, 2) == 1
+
     def set_trajectory(self, paddle):
         psubd = paddle.h // 5
         outer_top = range(paddle.y, paddle.y + psubd)
@@ -69,22 +70,27 @@ class Ball:
         outer_bot = range(paddle.y + (psubd * 4) + 1, paddle.y + paddle.h)
 
         collision_point = self.get_collision_point(paddle)
-        trajectory = 0
 
-        if collision_point in outer_top:
-            trajectory = 2
+        if collision_point < paddle.y:
+            trajectory = 6
+            if self.y_diff == 0: trajectory = -trajectory
+        elif collision_point in outer_top:
+            trajectory = 4
             if self.y_diff == 0: trajectory = -trajectory
         elif collision_point in inner_top:
-            trajectory = 1
+            trajectory = 2
             if self.y_diff == 0: trajectory = -trajectory
         elif collision_point in center:
-            trajectory = 0
+            if self.coin_flip(): trajectory = randint(1, 2)
+            else: trajectory = 0
         elif collision_point in inner_bot:
-            trajectory = 1
-        elif collision_point in outer_bot:
             trajectory = 2
+        elif collision_point in outer_bot:
+            trajectory = 4
+        elif collision_point > paddle.y + paddle.h:
+            trajectory = 6
         else:
-            trajectory = 3
+            trajectory = randint(0, 6)
 
         if self.y_diff < 0: trajectory = -trajectory
 
@@ -131,13 +137,8 @@ class Ball:
     def move(self, paddle1, paddle2):
         self.reset_flags()
 
-        self.frames_until_move -= 1
+        self.bounce_off_paddles(paddle1, paddle2)
+        self.shift_pos_horizontal()
 
-        if self.frames_until_move <= 0:
-            self.bounce_off_paddles(paddle1, paddle2)
-            self.shift_pos_horizontal()
-
-            self.bounce_off_edges()
-            self.shift_pos_vertical()
-
-            self.frames_until_move = self.rate
+        self.bounce_off_edges()
+        self.shift_pos_vertical()
