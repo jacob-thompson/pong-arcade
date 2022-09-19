@@ -8,10 +8,15 @@ class Player:
         self.screenh = 600
 
         self.score = 0
+        self.winner = False
 
         self.goal_line = 0, 0, 0, 0
         self.paddle = Rect(0, 0, 0, 0)
         self.color = 0, 0, 0
+
+    def reset_score(self):
+        self.score = 0
+        self.winner = False
 
     def set_color(self):
         if self.id == 1:

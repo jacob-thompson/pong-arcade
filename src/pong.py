@@ -52,19 +52,22 @@ class Pong:
     def print_help_info(self):
         print("Pong -- https://github.com/jacob-thompson/Pong")
 
-    def close_menu(self):
+    def start_new_game(self):
         self.show_menu = False
 
         self.p1.set_goal_pos()
         self.p1.set_paddle_pos()
         self.p1.set_color()
 
-        if self.menu_option2_selected:
-            self.p2.id = 2
-
         self.p2.set_goal_pos()
         self.p2.set_paddle_pos()
         self.p2.set_color()
+
+        self.p1.reset_score()
+        self.p2.reset_score()
+
+        if self.menu_option2_selected:
+            self.p2.id = 2
 
         pygame.mouse.set_visible(False)
 
@@ -83,8 +86,7 @@ class Pong:
             if self.menu_option3_selected: self.sound_paddle.play()
 
         if self.menu_option1_selected or self.menu_option2_selected:
-            self.close_menu()
-
+            self.start_new_game()
 
     def mouse_select(self, pos, button):
         if not self.show_menu: return
@@ -102,7 +104,7 @@ class Pong:
             if self.menu_option3_selected: self.sound_paddle.play()
 
         if self.menu_option1_selected or self.menu_option2_selected:
-            self.close_menu()
+            self.start_new_game()
 
     def handle(self, event):
         if event.type == pygame.QUIT: exit()
@@ -114,6 +116,15 @@ class Pong:
         if event.type == pygame.MOUSEBUTTONDOWN:
             self.mouse_select(event.pos, event.button)
 
+    def give_victory(self, player):
+        player.winner = True
+
+        self.show_menu = True
+
+    def check_for_winner(self, player):
+        if player.score >= 10:
+            self.give_victory(player)
+
     def check_for_score(self):
         if self.ball.rect.clipline(self.p1.goal_line) != ():
             self.p2.score += 1
@@ -121,11 +132,15 @@ class Pong:
 
             self.sound_score.play()
 
+            self.check_for_winner(self.p2)
+
         if self.ball.rect.clipline(self.p2.goal_line) != ():
             self.p1.score += 1
             self.ball.reset()
 
             self.sound_score.play()
+
+            self.check_for_winner(self.p1)
 
     def ai_paddle_movement(self):
         if self.ball.x_diff < 0: return
@@ -248,13 +263,8 @@ class Pong:
         option3_pos = self.menu_option3_rect.center
         option3_rect = option3_text.get_rect(center = option3_pos)
 
-        #pygame.draw.rect(self.surface, self.p1.color, self.menu_option1_rect, 1)
         self.surface.blit(option1_text, option1_rect)
-
-        #pygame.draw.rect(self.surface, self.p2.color, self.menu_option2_rect, 1)
         self.surface.blit(option2_text, option2_rect)
-
-        #pygame.draw.rect(self.surface, self.fg_color, self.menu_option3_rect, 1)
         self.surface.blit(option3_text, option3_rect)
 
     def draw_info(self):
