@@ -109,21 +109,21 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Jacob Alexander Thompson - [@jacob-thompson](https://github.com/jacob-thompson) - jacobalthompson@gmail.com
+Jacob Alexander Thompson - jacobalthompson@gmail.com
 
 Project Link - [jacob-thompson/Pong](https://github.com/jacob-thompson/Pong)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/appveyor/build/jacob-thompson/Pong
 [contributors-url]: https://github.com/jacob-thompson/Pong/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/appveyor/build/jacob-thompson/Pong
 [forks-url]: https://github.com/jacob-thompson/Pong/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/appveyor/build/jacob-thompson/Pong
 [stars-url]: https://github.com/jacob-thompson/Pong/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/appveyor/build/jacob-thompson/Pong
 [issues-url]: https://github.com/jacob-thompson/Pong/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/appveyor/build/jacob-thompson/Pong
 [license-url]: https://github.com/jacob-thompson/Pong/blob/main/LICENSE
 [product-screenshot]: resources/screenshot.png
