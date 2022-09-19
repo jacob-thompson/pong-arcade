@@ -104,7 +104,7 @@ pipenv run python src/main.py
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` or click [here](license-url) for more information.
+Distributed under the MIT License. See `LICENSE` or click [here](https://github.com/jacob-thompson/Pong/blob/main/LICENSE) for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
