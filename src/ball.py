@@ -2,15 +2,14 @@ from pygame import Rect
 
 class Ball:
     def __init__(self):
-        scale = 10
         screenw = 800
         screenh = 600
 
-        self.default_x = (screenw >> 1) + scale
+        self.default_x = (screenw >> 1) + 10
         self.default_y = screenh >> 1
         self.default_ball_pos = self.default_x, self.default_y
 
-        ball_size = scale, scale
+        ball_size = 10, 10
         self.rect = Rect(self.default_ball_pos, ball_size)
 
         self.default_speed = 2
@@ -23,6 +22,9 @@ class Ball:
         self.top_edge_line = 0, 0, screenw, 0
         self.bot_edge_line = 0, screenh, screenw, screenh
 
+        self.bflag_edge = False
+        self.bflag_paddle = False
+
     def reset_position(self):
         self.rect.x = self.default_x
         self.rect.y = self.default_y
@@ -32,9 +34,14 @@ class Ball:
         self.y_diff = 0
         self.frames_until_move = self.rate
 
+    def reset_flags(self):
+        self.bflag_edge = False
+        self.bflag_paddle = False
+
     def reset(self):
         self.reset_position()
         self.reset_movement()
+        self.reset_flags()
 
     def increase_speed(self):
         if abs(self.x_diff) < self.rect.w:
@@ -87,13 +94,19 @@ class Ball:
         if self.rect.clipline(self.top_edge_line) != ():
             self.flip_direction_vertical()
 
+            self.bflag_edge = True
+
         if self.rect.clipline(self.bot_edge_line) != ():
             self.flip_direction_vertical()
+
+            self.bflag_edge = True
 
     def bounce_off_paddles(self, paddle1, paddle2):
         if self.rect.colliderect(paddle1):
             self.increase_speed()
             self.flip_direction_horizontal()
+
+            self.bflag_paddle = True
 
             self.rect.x = paddle1.x + paddle1.w + 1
 
@@ -102,6 +115,8 @@ class Ball:
         if self.rect.colliderect(paddle2):
             self.increase_speed()
             self.flip_direction_horizontal()
+
+            self.bflag_paddle = True
 
             self.rect.x = paddle2.x - paddle2.w - 1
 
@@ -114,6 +129,8 @@ class Ball:
         self.rect.y += self.y_diff
 
     def move(self, paddle1, paddle2):
+        self.reset_flags()
+
         self.frames_until_move -= 1
 
         if self.frames_until_move <= 0:

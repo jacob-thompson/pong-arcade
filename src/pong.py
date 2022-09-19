@@ -11,15 +11,15 @@ class Pong:
         screensize = self.screenw, self.screenh = 800, 600
         self.surface = pygame.display.set_mode(screensize)
 
-        self.font = pygame.font.Font("resources/font.ttf", 50)
-        self.font_big = pygame.font.Font("resources/font.ttf", 100)
-        self.font_small = pygame.font.Font("resources/font.ttf", 10)
+        self.font = pygame.font.Font("resources/visible/font.ttf", 50)
+        self.font_big = pygame.font.Font("resources/visible/font.ttf", 100)
+        self.font_small = pygame.font.Font("resources/visible/font.ttf", 10)
 
         self.p1 = player.Player(1)
         self.p2 = player.Player(0)
         self.ball = ball.Ball()
 
-        self.ai_move_rate = 3
+        self.ai_move_rate = 2
         self.frames_until_ai_move = self.ai_move_rate
 
         self.bg_color = 255, 255, 255
@@ -30,6 +30,10 @@ class Pong:
         self.show_menu = True
 
         self.mouse_pos = pygame.mouse.get_pos()
+
+        self.sound_paddle = pygame.mixer.Sound("resources/audible/paddle.wav")
+        self.sound_wall = pygame.mixer.Sound("resources/audible/wall.wav")
+        self.sound_score = pygame.mixer.Sound("resources/audible/score.wav")
 
         opt_h = 150
         self.menu_option1_rect = pygame.Rect(0, opt_h, self.screenw, opt_h)
@@ -42,7 +46,7 @@ class Pong:
     def set_window_properties(self):
         pygame.display.set_caption(self.title)
 
-        icon = pygame.image.load("resources/icon.png")
+        icon = pygame.image.load("resources/visible/icon.png")
         pygame.display.set_icon(icon)
 
     def print_help_info(self):
@@ -76,6 +80,8 @@ class Pong:
         if button == pygame.K_3:
             self.menu_option3_selected = not self.menu_option3_selected
 
+            if self.menu_option3_selected: self.sound_paddle.play()
+
         if self.menu_option1_selected or self.menu_option2_selected:
             self.close_menu()
 
@@ -92,6 +98,8 @@ class Pong:
 
         if self.menu_option3_rect.collidepoint(pos):
             self.menu_option3_selected = not self.menu_option3_selected
+
+            if self.menu_option3_selected: self.sound_paddle.play()
 
         if self.menu_option1_selected or self.menu_option2_selected:
             self.close_menu()
@@ -111,9 +119,13 @@ class Pong:
             self.p2.score += 1
             self.ball.reset()
 
+            self.sound_score.play()
+
         if self.ball.rect.clipline(self.p2.goal_line) != ():
             self.p1.score += 1
             self.ball.reset()
+
+            self.sound_score.play()
 
     def ai_paddle_movement(self):
         if self.ball.x_diff < 0: return
@@ -159,6 +171,13 @@ class Pong:
 
     def update_ball_position(self):
         self.check_for_score()
+
+        if self.ball.bflag_edge == True:
+            self.sound_wall.play()
+
+        if self.ball.bflag_paddle == True:
+            self.sound_paddle.play()
+
         self.ball.move(self.p1.paddle, self.p2.paddle)
 
     def draw_background(self):
