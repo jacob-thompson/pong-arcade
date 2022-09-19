@@ -70,12 +70,15 @@ Follow the below steps to get the program running.
    ```sh
    git clone https://github.com/jacob-thompson/Pong.git
    ```
-2. Install program environment
-    If GNU build tools (`build-essential`) are installed,
+2. Change to program directory
+    ```sh
+    cd Pong
+    ```
+3. Install program environment
    ```sh
    make install
    ```
-   otherwise,
+   or
    ```sh
     pip install pipenv
     pipenv install
@@ -88,11 +91,10 @@ Follow the below steps to get the program running.
 
 To run the program, run the main script.
 
-If GNU build tools (`build-essential`) are installed,
 ```sh
 make
 ```
-otherwise,
+or
 ```sh
 pipenv run python src/main.py
 ```
@@ -102,7 +104,7 @@ pipenv run python src/main.py
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See `LICENSE` or click [here](license-url) for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
