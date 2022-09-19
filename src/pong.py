@@ -68,6 +68,8 @@ class Pong:
 
         if self.menu_option2_selected:
             self.p2.id = 2
+        else:
+            self.p2.id = 0
 
         pygame.mouse.set_visible(False)
 
@@ -120,6 +122,9 @@ class Pong:
         player.winner = True
 
         self.show_menu = True
+        self.menu_option1_selected = False
+        self.menu_option2_selected = False
+
         pygame.mouse.set_visible(True)
 
     def check_for_winner(self, player):
@@ -158,12 +163,12 @@ class Pong:
 
     def ai_paddle_movement(self):
         if self.ball.x_diff < 0:
-            speed = 2
+            speed = 1
         else:
             speed = 6
 
-        can_move_up = self.ball.rect.top < self.p2.paddle.top
-        can_move_down = self.ball.rect.bottom > self.p2.paddle.bottom
+        can_move_up = self.ball.rect.bottom < self.p2.paddle.centery
+        can_move_down = self.ball.rect.top > self.p2.paddle.centery
 
         if can_move_up:
             self.p2.paddle.y -= speed

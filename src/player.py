@@ -36,13 +36,13 @@ class Player:
             self.paddle = Rect(paddle_pos, paddle_size)
 
     def ensure_in_bound_top(self):
-        defect = 25
+        defect = 20
 
         if self.paddle.y < defect:
             self.paddle.y = defect
 
     def ensure_in_bound_bot(self):
-        defect = 25
+        defect = 20
 
         if self.paddle.y > self.screenh - self.paddle.h - defect:
             self.paddle.y = self.screenh - self.paddle.h - defect
