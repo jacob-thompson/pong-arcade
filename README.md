@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/jacob-thompson/Pong">
-    <img src="resources/icon.png" alt="Logo" width="80" height="80">
+    <img src="resources/visible/icon.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Pong</h3>
@@ -116,14 +116,14 @@ Project Link - [jacob-thompson/Pong](https://github.com/jacob-thompson/Pong)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-[contributors-shield]: https://img.shields.io/appveyor/build/jacob-thompson/Pong
+[contributors-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=for-the-badge
 [contributors-url]: https://github.com/jacob-thompson/Pong/graphs/contributors
-[forks-shield]: https://img.shields.io/appveyor/build/jacob-thompson/Pong
+[forks-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=for-the-badge
 [forks-url]: https://github.com/jacob-thompson/Pong/network/members
-[stars-shield]: https://img.shields.io/appveyor/build/jacob-thompson/Pong
+[stars-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=for-the-badge
 [stars-url]: https://github.com/jacob-thompson/Pong/stargazers
-[issues-shield]: https://img.shields.io/appveyor/build/jacob-thompson/Pong
+[issues-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=for-the-badge
 [issues-url]: https://github.com/jacob-thompson/Pong/issues
-[license-shield]: https://img.shields.io/appveyor/build/jacob-thompson/Pong
+[license-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=for-the-badge
 [license-url]: https://github.com/jacob-thompson/Pong/blob/main/LICENSE
-[product-screenshot]: resources/screenshot.png
+[product-screenshot]: resources/visible/screenshot.png
