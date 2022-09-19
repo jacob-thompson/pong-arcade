@@ -116,14 +116,14 @@ Project Link - [jacob-thompson/Pong](https://github.com/jacob-thompson/Pong)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=flat
 [contributors-url]: https://github.com/jacob-thompson/Pong/graphs/contributors
-[forks-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/jacob-thompson/Pong.svg?style=flat
 [forks-url]: https://github.com/jacob-thompson/Pong/network/members
-[stars-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/jacob-thompson/Pong.svg?style=flat
 [stars-url]: https://github.com/jacob-thompson/Pong/stargazers
-[issues-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/jacob-thompson/Pong.svg?style=flat
 [issues-url]: https://github.com/jacob-thompson/Pong/issues
-[license-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/jacob-thompson/Pong.svg?style=flat
 [license-url]: https://github.com/jacob-thompson/Pong/blob/main/LICENSE
 [product-screenshot]: resources/visible/screenshot.png
