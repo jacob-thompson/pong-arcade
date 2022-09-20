@@ -1,0 +1,19 @@
+[project]
+name = "Pong"
+version = "0.1.0"
+authors = [
+  { name="Jacob Alexander Thompson", email="jacobalthompson@gmail.com" },
+]
+description = "Pong written using pygame"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/jacob-thompson/pong"
+"Bug Tracker" = "https://github.com/jacob-thompson/pong/issues"
