@@ -16,7 +16,7 @@ def main():
 
         pong.tick(frame_rate)
 
-        if pong.show_menu == False:
+        if not pong.show_menu and not pong.paused:
             pong.update_paddle_position()
             pong.update_ball_position()
 

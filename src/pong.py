@@ -28,6 +28,7 @@ class Pong:
         self.title = "Pong"
 
         self.show_menu = True
+        self.paused = False
 
         self.mouse_pos = pygame.mouse.get_pos()
 
@@ -54,9 +55,7 @@ class Pong:
     def print_help_info(self):
         print("Pong -- https://github.com/jacob-thompson/Pong")
 
-    def start_new_game(self):
-        self.show_menu = False
-
+    def reset_game(self):
         self.p1.set_paddle_pos()
         self.p1.set_color()
 
@@ -70,6 +69,14 @@ class Pong:
             self.p2.id = 2
         else:
             self.p2.id = 0
+
+        self.ball.reset()
+
+    def start_new_game(self):
+        self.show_menu = False
+        self.paused = False
+
+        self.reset_game()
 
         pygame.mouse.set_visible(False)
 
@@ -108,11 +115,23 @@ class Pong:
         if self.menu_option1_selected or self.menu_option2_selected:
             self.start_new_game()
 
+    def go_to_menu(self):
+        self.menu_option1_selected = False
+        self.menu_option2_selected = False
+
+        self.show_menu = True
+
+    def toggle_pause(self):
+        if not self.show_menu:
+            self.paused = not self.paused
+
     def handle(self, event):
         if event.type == pygame.QUIT: exit()
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE: exit()
+            elif event.key == pygame.K_p: self.toggle_pause()
+            elif event.key == pygame.K_m: self.go_to_menu()
             else: self.keyboard_select(event.key)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -121,9 +140,7 @@ class Pong:
     def give_victory(self, player):
         player.winner = True
 
-        self.show_menu = True
-        self.menu_option1_selected = False
-        self.menu_option2_selected = False
+        self.go_to_menu()
 
         pygame.mouse.set_visible(True)
 
