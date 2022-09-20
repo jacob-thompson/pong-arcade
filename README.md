@@ -60,40 +60,23 @@ Follow the below steps to get the program running.
 
 ### Prerequisites
 
-* Python 3.10
-* pipenv
+* Python >= 3.10.0
+* pygame
 
-### Installation
+### Install
 
-1. Clone the repo
+1. Clone the repo:
     ```sh
     git clone https://github.com/jacob-thompson/Pong.git
     ```
-2. Change directory to the project file
+3. Install program environment:
     ```sh
-    cd Pong
-    ```
-3. Install program environment
-    ```sh
-    make install
-    ```
-    or
-    ```sh
-    pip install pipenv
     pipenv install
     ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Run
 
-
-## Usage
-
-To run the program, run the `main` script.
-
-```sh
-make
-```
-or
+Run the `main` script:
 ```sh
 pipenv run python src/main.py
 ```
