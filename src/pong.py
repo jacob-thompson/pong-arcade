@@ -139,7 +139,7 @@ class Pong:
             self.p1.score += 1
             self.ball.reset()
 
-            self.sound_score.play()
+            if self.menu_option3_selected: self.sound_score.play()
 
             self.check_for_winner(self.p1)
 
@@ -147,7 +147,7 @@ class Pong:
             self.p2.score += 1
             self.ball.reset()
 
-            self.sound_score.play()
+            if self.menu_option3_selected: self.sound_score.play()
 
             self.check_for_winner(self.p2)
 
@@ -206,10 +206,10 @@ class Pong:
     def update_ball_position(self):
         self.check_for_score()
 
-        if self.ball.bflag_edge == True:
+        if self.ball.bflag_edge and self.menu_option3_selected:
             self.sound_wall.play()
 
-        if self.ball.bflag_paddle == True:
+        if self.ball.bflag_paddle and self.menu_option3_selected:
             self.sound_paddle.play()
 
         self.ball.move(self.p1.paddle, self.p2.paddle)
