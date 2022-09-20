@@ -65,31 +65,30 @@ Follow the below steps to get the program running.
 
 ### Installation
 
-
 1. Clone the repo
-   ```sh
-   git clone https://github.com/jacob-thompson/Pong.git
-   ```
-2. Change to program directory
+    ```sh
+    git clone https://github.com/jacob-thompson/Pong.git
+    ```
+2. Change directory to the project file
     ```sh
     cd Pong
     ```
 3. Install program environment
-   ```sh
-   make install
-   ```
-   or
-   ```sh
+    ```sh
+    make install
+    ```
+    or
+    ```sh
     pip install pipenv
     pipenv install
-   ```
+    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Usage
 
-To run the program, run the main script.
+To run the program, run the `main` script.
 
 ```sh
 make
