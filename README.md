@@ -60,8 +60,11 @@ Follow the below steps to get the program running.
 
 ### Prerequisites
 
-* Python >= 3.10.0
+* Python >= 3.10
 * pygame
+```sh
+pip install -r requirements.txt
+```
 
 ### Download
 
