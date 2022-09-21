@@ -201,9 +201,9 @@ class Pong:
         screensize = SCREEN_W, SCREEN_H
         self.surface = pygame.display.set_mode(screensize)
 
-        self.font = pygame.font.Font("data/gfx/font.ttf", 50)
-        self.font_big = pygame.font.Font("data/gfx/font.ttf", 100)
-        self.font_small = pygame.font.Font("data/gfx/font.ttf", 10)
+        self.font = pygame.font.Font("data/gfx/atari.otf", 50)
+        self.font_big = pygame.font.Font("data/gfx/atari.otf", 100)
+        self.font_small = pygame.font.Font("data/gfx/atari.otf", 10)
 
         self.p1 = Player(1)
         self.p2 = Player(0)
