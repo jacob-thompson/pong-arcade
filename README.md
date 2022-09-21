@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/jacob-thompson/Pong">
-    <img src="resources/visible/icon.png" alt="Logo" width="80" height="80">
+    <img src="data/gfx/icon.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Pong</h3>
@@ -63,22 +63,18 @@ Follow the below steps to get the program running.
 * Python >= 3.10.0
 * pygame
 
-### Install
+### Download
 
-1. Clone the repo:
-    ```sh
-    git clone https://github.com/jacob-thompson/Pong.git
-    ```
-3. Install program environment:
-    ```sh
-    pipenv install
-    ```
+To download the source code, clone the repository:
+```sh
+git clone https://github.com/jacob-thompson/Pong.git
+```
 
 ### Run
 
-Run the `main` script:
+To execute the program from source, run the script:
 ```sh
-pipenv run python src/main.py
+python3 pong.py
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -110,4 +106,4 @@ Project Link - [jacob-thompson/Pong](https://github.com/jacob-thompson/Pong)
 [issues-url]: https://github.com/jacob-thompson/Pong/issues
 [license-shield]: https://img.shields.io/github/license/jacob-thompson/Pong.svg?style=flat
 [license-url]: https://github.com/jacob-thompson/Pong/blob/main/LICENSE
-[product-screenshot]: resources/visible/screenshot.png
+[product-screenshot]: data/gfx/screenshot.png

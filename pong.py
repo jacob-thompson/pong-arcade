@@ -1,23 +1,213 @@
-import ball, player
-
 import pygame
 
 from sys import exit
+from random import randint
+
+
+SCREEN_W = 800
+SCREEN_H = 600
+
+
+class Ball:
+    def __init__(self):
+        self.default_x = (SCREEN_W >> 1) + 10
+        self.default_y = SCREEN_H >> 1
+        self.default_ball_pos = self.default_x, self.default_y
+
+        ball_size = 10, 10
+        self.rect = pygame.Rect(self.default_ball_pos, ball_size)
+
+        self.default_speed = 6
+        self.x_diff = self.default_speed
+        self.y_diff = 0
+
+        self.top_edge_line = 0, 0, SCREEN_W, 0
+        self.bot_edge_line = 0, SCREEN_H, SCREEN_W, SCREEN_H
+
+        self.bflag_edge = False
+        self.bflag_paddle = False
+
+    def reset_position(self):
+        self.rect.x = self.default_x
+        self.rect.y = self.default_y
+
+    def reset_movement(self):
+        self.x_diff = self.default_speed
+        self.y_diff = 0
+
+    def reset_flags(self):
+        self.bflag_edge = False
+        self.bflag_paddle = False
+
+    def reset(self):
+        self.reset_position()
+        self.reset_movement()
+        self.reset_flags()
+
+    def increase_speed(self):
+        increment = 2
+
+        if abs(self.x_diff) < self.rect.w << 1:
+            if self.x_diff > 0: self.x_diff += increment
+            else: self.x_diff -= increment
+
+    def flip_direction_horizontal(self):
+        self.x_diff = -self.x_diff
+
+    def flip_direction_vertical(self):
+        self.y_diff = -self.y_diff
+
+    def get_collision_point(self, paddle):
+        collision_rect = self.rect.clip(paddle)
+        point = collision_rect.y + (collision_rect.h >> 1)
+
+        return point
+
+    def trajectory(self, paddle):
+        psubd = paddle.h // 5
+        outer_top = range(paddle.y, paddle.y + psubd)
+        inner_top = range(paddle.y + psubd + 1, paddle.y + (psubd * 2))
+        center = range(paddle.y + (psubd * 2) + 1, paddle.y + (psubd * 3))
+        inner_bot = range(paddle.y + (psubd * 3) + 1, paddle.y + (psubd * 4))
+        outer_bot = range(paddle.y + (psubd * 4) + 1, paddle.y + paddle.h)
+
+        collision_point = self.get_collision_point(paddle)
+
+        min_t = 0
+        low_t = 2
+        mid_t = 5
+        max_t = 8
+
+        if collision_point < paddle.y:
+            trajectory = max_t
+            if self.y_diff == 0: trajectory = -trajectory
+        elif collision_point in outer_top:
+            trajectory = mid_t
+            if self.y_diff == 0: trajectory = -trajectory
+        elif collision_point in inner_top:
+            trajectory = low_t
+            if self.y_diff == 0: trajectory = -trajectory
+        elif collision_point in center:
+            if self.y_diff == 0: trajectory = randint(-low_t, low_t)
+            else: trajectory = 0
+        elif collision_point in inner_bot:
+            trajectory = low_t
+        elif collision_point in outer_bot:
+            trajectory = mid_t
+        elif collision_point > paddle.y + paddle.h:
+            trajectory = max_t
+        else:
+            trajectory = randint(min_t, max_t)
+
+        if self.y_diff < 0: trajectory = -trajectory
+
+        return trajectory
+
+    def bounce_off_edges(self):
+        if self.rect.clipline(self.top_edge_line) != ():
+            self.flip_direction_vertical()
+
+            self.bflag_edge = True
+
+        if self.rect.clipline(self.bot_edge_line) != ():
+            self.flip_direction_vertical()
+
+            self.bflag_edge = True
+
+    def bounce_off_paddles(self, paddle1, paddle2):
+        if self.rect.colliderect(paddle1):
+            self.bflag_paddle = True
+
+            self.increase_speed()
+            self.flip_direction_horizontal()
+            self.rect.x = paddle1.right + 1
+
+            self.y_diff = self.trajectory(paddle1)
+
+        if self.rect.colliderect(paddle2):
+            self.bflag_paddle = True
+
+            self.increase_speed()
+            self.flip_direction_horizontal()
+            self.rect.x = paddle2.left - self.rect.w - 1
+
+            self.y_diff = self.trajectory(paddle2)
+
+    def shift_pos_horizontal(self):
+        self.rect.x += self.x_diff
+
+    def shift_pos_vertical(self):
+        self.rect.y += self.y_diff
+
+    def move(self, paddle1, paddle2):
+        self.reset_flags()
+
+        self.bounce_off_paddles(paddle1, paddle2)
+        self.shift_pos_horizontal()
+
+        self.bounce_off_edges()
+        self.shift_pos_vertical()
+
+
+class Player:
+    def __init__(self, number):
+        self.id = number
+
+        self.score = 0
+        self.winner = False
+
+        self.paddle = pygame.Rect(0, 0, 0, 0)
+        self.color = 0, 0, 0
+
+    def reset_score(self):
+        self.score = 0
+        self.winner = False
+
+    def set_color(self):
+        if self.id == 1:
+            self.color = 0, 0, 255
+        else:
+            self.color = 255, 0, 0
+
+    def set_paddle_pos(self):
+        paddle_size = pw, ph = 10, 50
+        distance_from_edge = ph >> 1
+        default_y = SCREEN_H >> 1
+
+        if self.id == 1:
+            paddle_pos = distance_from_edge, default_y
+            self.paddle = pygame.Rect(paddle_pos, paddle_size)
+        else:
+            paddle_pos = SCREEN_W - distance_from_edge - pw, default_y
+            self.paddle = pygame.Rect(paddle_pos, paddle_size)
+
+    def ensure_in_bound_top(self):
+        defect = 20
+
+        if self.paddle.y < defect:
+            self.paddle.y = defect
+
+    def ensure_in_bound_bot(self):
+        defect = 20
+
+        if self.paddle.y > SCREEN_H - self.paddle.h - defect:
+            self.paddle.y = SCREEN_H - self.paddle.h - defect
+
 
 class Pong:
     def __init__(self):
         pygame.init()
 
-        screensize = self.screenw, self.screenh = 800, 600
+        screensize = SCREEN_W, SCREEN_H
         self.surface = pygame.display.set_mode(screensize)
 
-        self.font = pygame.font.Font("resources/visible/font.ttf", 50)
-        self.font_big = pygame.font.Font("resources/visible/font.ttf", 100)
-        self.font_small = pygame.font.Font("resources/visible/font.ttf", 10)
+        self.font = pygame.font.Font("data/gfx/font.ttf", 50)
+        self.font_big = pygame.font.Font("data/gfx/font.ttf", 100)
+        self.font_small = pygame.font.Font("data/gfx/font.ttf", 10)
 
-        self.p1 = player.Player(1)
-        self.p2 = player.Player(0)
-        self.ball = ball.Ball()
+        self.p1 = Player(1)
+        self.p2 = Player(0)
+        self.ball = Ball()
 
         self.ai_move_rate = 2
         self.frames_until_ai_move = self.ai_move_rate
@@ -34,14 +224,14 @@ class Pong:
 
         self.clock = pygame.time.Clock()
 
-        self.sound_paddle = pygame.mixer.Sound("resources/audible/paddle.wav")
-        self.sound_wall = pygame.mixer.Sound("resources/audible/wall.wav")
-        self.sound_score = pygame.mixer.Sound("resources/audible/score.wav")
+        self.sound_paddle = pygame.mixer.Sound("data/sfx/paddle.wav")
+        self.sound_wall = pygame.mixer.Sound("data/sfx/wall.wav")
+        self.sound_score = pygame.mixer.Sound("data/sfx/score.wav")
 
         opt_h = 150
-        self.menu_option1_rect = pygame.Rect(0, opt_h, self.screenw, opt_h)
-        self.menu_option2_rect = pygame.Rect(0, opt_h * 2, self.screenw, opt_h)
-        self.menu_option3_rect = pygame.Rect(0, opt_h * 3, self.screenw, opt_h)
+        self.menu_option1_rect = pygame.Rect(0, opt_h, SCREEN_W, opt_h)
+        self.menu_option2_rect = pygame.Rect(0, opt_h * 2, SCREEN_W, opt_h)
+        self.menu_option3_rect = pygame.Rect(0, opt_h * 3, SCREEN_W, opt_h)
         self.menu_option1_selected = False
         self.menu_option2_selected = False
         self.menu_option3_selected = True
@@ -49,7 +239,7 @@ class Pong:
     def set_window_properties(self):
         pygame.display.set_caption(self.title)
 
-        icon = pygame.image.load("resources/visible/icon.png")
+        icon = pygame.image.load("data/gfx/icon.png")
         pygame.display.set_icon(icon)
 
     def print_help_info(self):
@@ -149,7 +339,7 @@ class Pong:
             self.give_victory(player)
 
     def check_for_score(self):
-        p1_score = self.ball.rect.right >= self.screenw
+        p1_score = self.ball.rect.right >= SCREEN_W
         p2_score = self.ball.rect.left <= 0
 
         if p1_score:
@@ -237,8 +427,8 @@ class Pong:
     def draw_center_line(self):
         linew = 10
         lineh = linew << 1
-        top = self.screenh
-        left = (self.screenw >> 1) - (linew >> 1)
+        top = SCREEN_H
+        left = (SCREEN_W >> 1) - (linew >> 1)
         while top >= 0:
             top -= lineh >> 1
             center_rect = (left, top, linew, lineh)
@@ -251,12 +441,12 @@ class Pong:
 
     def draw_scores(self):
         score1 = self.font.render(str(self.p1.score), 1, self.p1.color)
-        s1_pos = self.screenw >> 2, 0
+        s1_pos = SCREEN_W >> 2, 0
         s1_rect = score1.get_rect(midtop = s1_pos)
         self.surface.blit(score1, s1_rect)
 
         score2 = self.font.render(str(self.p2.score), 1, self.p2.color)
-        s2_pos = (self.screenw >> 1) + (self.screenw >> 2), 0
+        s2_pos = (SCREEN_W >> 1) + (SCREEN_W >> 2), 0
         s2_rect = score2.get_rect(midtop = s2_pos)
         self.surface.blit(score2, s2_rect)
 
@@ -273,7 +463,7 @@ class Pong:
 
     def draw_title(self):
         text = self.font_big.render(self.title, 1, self.fg_color)
-        tpos = self.screenw >> 1, 15
+        tpos = SCREEN_W >> 1, 15
         trect = text.get_rect(midtop = tpos)
         self.surface.blit(text, trect)
 
@@ -307,7 +497,7 @@ class Pong:
         disclaimer = "MIT License Copyright (c) 2022 Jacob Alexander Thompson"
 
         text = self.font_small.render(disclaimer, 1, self.fg_color)
-        tpos = 3, self.screenh
+        tpos = 3, SCREEN_H
         trect = text.get_rect(bottomleft = tpos)
         self.surface.blit(text, trect)
 
@@ -325,3 +515,28 @@ class Pong:
 
     def update_frame(self):
         pygame.display.flip()
+
+
+def main():
+    pong = Pong()
+
+    pong.set_window_properties()
+    pong.print_help_info()
+
+    frame_rate = 60
+
+    while 1:
+        for event in pygame.event.get():
+            pong.handle(event)
+
+        pong.tick(frame_rate)
+
+        if not pong.show_menu and not pong.paused:
+            pong.update_paddle_position()
+            pong.update_ball_position()
+
+        pong.draw_frame()
+        pong.update_frame()
+
+if __name__ == "__main__":
+    main()
