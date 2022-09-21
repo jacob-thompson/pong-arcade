@@ -239,7 +239,7 @@ class Pong:
     def set_window_properties(self):
         pygame.display.set_caption(self.title)
 
-        icon = pygame.image.load("data/gfx/icon.png")
+        icon = pygame.image.load("data/gfx/logo.png")
         pygame.display.set_icon(icon)
 
     def print_help_info(self):
