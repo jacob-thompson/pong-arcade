@@ -481,9 +481,9 @@ class Pong:
         option2_rect = option2_text.get_rect(center = option2_pos)
 
         if self.menu_option3_selected:
-            option3 = "(x) Sound"
+            option3 = "(3) Sound: On"
         else:
-            option3 = "( ) Sound"
+            option3 = "(3) Sound: Off"
 
         option3_text = self.font.render(option3, 1, self.fg_color)
         option3_pos = self.menu_option3_rect.center
