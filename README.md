@@ -49,7 +49,7 @@
 
 [![Pong Screenshot][product-screenshot]](https://github.com/jacob-thompson/Pong)
 
-This executable program is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This implementation was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/Pong/tree/main/resources).
+This executable program is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This implementation was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/Pong/tree/main/data).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
