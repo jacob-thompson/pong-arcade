@@ -39,6 +39,7 @@
         <li><a href="#run">Run</a></li>
       </ul>
     </li>
+    <li><a href="#controls">Controls</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -79,6 +80,34 @@ To execute the program from source, run the script:
 ```sh
 python3 pong.py
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Controls
+
+The game may be quit by pressing `Esc` at any time.
+Controls can be brought up in-game by pressing `C` on the menu screen.
+
+### Menu
+
+* `C` Show controls menu
+* `1` Select first option (One player)
+* `2` Select second option (Two players)
+* `3` Toggle third option (Sound)
+
+### In-Game
+
+#### Movement
+
+* `W` Move Player1 up
+* `S` Move Player1 down
+* `Up` Move Player2 or Player1 up
+* `Down` Move Player2 or Player1 down
+
+#### Pause/Quit
+
+* `P` Pause the game
+* `M` Bring up the menu (Exit current game)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

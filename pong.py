@@ -204,7 +204,7 @@ class Pong:
 
         self.font = pygame.font.Font("data/gfx/atari.otf", 50)
         self.font_big = pygame.font.Font("data/gfx/atari.otf", 100)
-        self.font_small = pygame.font.Font("data/gfx/atari.otf", 25)
+        self.font_small = pygame.font.Font("data/gfx/atari.otf", 20)
         self.font_tiny = pygame.font.Font("data/gfx/atari.otf", 10)
 
         self.sound_paddle = pygame.mixer.Sound("data/sfx/paddle.wav")
@@ -275,16 +275,12 @@ class Pong:
 
         if self.show_help_menu:
             self.show_help_menu = not self.show_help_menu
-
         elif button == pygame.K_c:
             self.show_help_menu = not self.show_help_menu
-
         elif button == pygame.K_1 and not self.show_help_menu:
             self.opt1_selected = True
-
         elif button == pygame.K_2 and not self.show_help_menu:
             self.opt2_selected = True
-
         elif button == pygame.K_3 and not self.show_help_menu:
             self.opt3_selected = not self.opt3_selected
 
@@ -299,16 +295,12 @@ class Pong:
 
         if self.show_help_menu:
             self.show_help_menu = not self.show_help_menu
-
         elif self.help_rect.collidepoint(pos):
             self.show_help_menu = not self.show_help_menu
-
         elif self.opt1_rect.collidepoint(pos) and not self.show_help_menu:
             self.opt1_selected = True
-
         elif self.opt2_rect.collidepoint(pos) and not self.show_help_menu:
             self.opt2_selected = True
-
         elif self.opt3_rect.collidepoint(pos) and not self.show_help_menu:
             self.opt3_selected = not self.opt3_selected
 
@@ -331,10 +323,11 @@ class Pong:
         if event.type == pygame.QUIT: exit()
 
         if event.type == pygame.KEYDOWN:
+            self.menu_keyboard_select(event.key)
+
             if event.key == pygame.K_ESCAPE: exit()
             elif event.key == pygame.K_p: self.toggle_pause()
             elif event.key == pygame.K_m: self.go_to_menu()
-            else: self.menu_keyboard_select(event.key)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             self.menu_mouse_select(event.pos, event.button)
@@ -527,7 +520,7 @@ class Pong:
         self.draw_info()
 
     def draw_arrow(self, surface, start_pos, end_pos, color):
-        body_w = 5
+        body_w = 1
         head_w = 20
         head_h = 10
 
@@ -588,18 +581,76 @@ class Pong:
         self.draw_arrow(self.surface, p2_down_spos, p2_down_epos, self.fg_color)
 
     def draw_help_text(self):
+        cmdleft = (SCREEN_W >> 3) * 3
+        cmdright = (SCREEN_W >> 3) * 5
+        cmdup = SCREEN_H >> 2
+        cmddown = cmdup * 3
+
+        hmenu = "Pong controls"
+        hmenu_text = self.font_small.render(hmenu, 1, self.fg_color)
+        hmenu_pos = SCREEN_W >> 1, 0
+        hmenu_rect = hmenu_text.get_rect(midtop = hmenu_pos)
+        self.surface.blit(hmenu_text, hmenu_rect)
+
+        pause = "P  -  Pause game"
+        pause_text = self.font_small.render(pause, 1, self.fg_color)
+        pause_pos = self.p1.paddle.centerx, SCREEN_H >> 3
+        pause_rect = pause_text.get_rect(center = pause_pos)
+        self.surface.blit(pause_text, pause_rect)
+
+        menu = "Show menu  -  M"
+        menu_text = self.font_small.render(menu, 1, self.fg_color)
+        menu_pos = self.p2.paddle.centerx, SCREEN_H >> 3
+        menu_rect = menu_text.get_rect(center = menu_pos)
+        self.surface.blit(menu_text, menu_rect)
+
+        wkey = "W"
+        wkey_text = self.font_small.render(wkey, 1, self.fg_color)
+        wkey_pos = cmdleft, cmdup
+        wkey_rect = wkey_text.get_rect(center = wkey_pos)
+        self.surface.blit(wkey_text, wkey_rect)
+
+        skey = "S"
+        skey_text = self.font_small.render(skey, 1, self.fg_color)
+        skey_pos = cmdleft, cmddown
+        skey_rect = skey_text.get_rect(center = skey_pos)
+        self.surface.blit(skey_text, skey_rect)
+
+        uarr = "Up"
+        uarr_text = self.font_small.render(uarr, 1, self.fg_color)
+        uarr_pos = cmdright, cmdup
+        uarr_rect = uarr_text.get_rect(center = uarr_pos)
+        self.surface.blit(uarr_text, uarr_rect)
+
+        darr = "Down"
+        darr_text = self.font_small.render(darr, 1, self.fg_color)
+        darr_pos = cmdright, cmddown
+        darr_rect = darr_text.get_rect(center = darr_pos)
+        self.surface.blit(darr_text, darr_rect)
+
         p1 = "Player 1"
-        p1_text = self.font.render(p1, 1, self.blue)
-        p1_pos = self.p1.paddle.centerx, 0
-        p1_rect = p1_text.get_rect(midtop = p1_pos)
+        p1_text = self.font_small.render(p1, 1, self.blue)
+        p1_pos = SCREEN_W >> 3, self.p1.paddle.centery
+        p1_rect = p1_text.get_rect(center = p1_pos)
+        self.surface.blit(p1_text, p1_rect)
 
         p2 = "Player 2"
-        p2_text = self.font.render(p2, 1, self.red)
-        p2_pos = self.p2.paddle.centerx, 0
-        p2_rect = p2_text.get_rect(midtop = p2_pos)
-
-        self.surface.blit(p1_text, p1_rect)
+        p2_text = self.font_small.render(p2, 1, self.red)
+        p2_pos = SCREEN_W - (SCREEN_W >> 3), self.p2.paddle.centery
+        p2_rect = p2_text.get_rect(center = p2_pos)
         self.surface.blit(p2_text, p2_rect)
+
+        info = "Player1 may use arrow keys in single-player games"
+        info_text = self.font_small.render(info, 1, self.fg_color)
+        info_pos = SCREEN_W >> 1, SCREEN_H - (SCREEN_H >> 3)
+        info_rect = info_text.get_rect(center = info_pos)
+        self.surface.blit(info_text, info_rect)
+
+        cont = "Press any button to continue"
+        cont_text = self.font_small.render(cont, 1, self.fg_color)
+        cont_pos = SCREEN_W >> 1, SCREEN_H
+        cont_rect = cont_text.get_rect(midbottom = cont_pos)
+        self.surface.blit(cont_text, cont_rect)
 
     def draw_help_menu(self):
         self.draw_background()
