@@ -1,11 +1,9 @@
 import pygame
 
-from sys import exit
 from random import randint
+from sys import exit
 
-
-SCREEN_W = 800
-SCREEN_H = 600
+SCREEN_SIZE = SCREEN_W, SCREEN_H = 800, 600
 
 
 class Ball:
@@ -150,14 +148,14 @@ class Ball:
 
 
 class Player:
-    def __init__(self, number):
+    def __init__(self, number, color):
         self.id = number
+        self.color = color
 
         self.score = 0
         self.winner = False
 
-        self.paddle = pygame.Rect(0, 0, 0, 0)
-        self.color = 0, 0, 0
+        self.paddle = pygame.Rect(0, 0, 10, 50)
 
     def reset_score(self):
         self.score = 0
@@ -198,43 +196,45 @@ class Pong:
     def __init__(self):
         pygame.init()
 
-        screensize = SCREEN_W, SCREEN_H
-        self.surface = pygame.display.set_mode(screensize)
+        self.surface = pygame.display.set_mode(SCREEN_SIZE)
 
-        self.font = pygame.font.Font("data/gfx/atari.otf", 50)
-        self.font_big = pygame.font.Font("data/gfx/atari.otf", 100)
-        self.font_small = pygame.font.Font("data/gfx/atari.otf", 10)
-
-        self.p1 = Player(1)
-        self.p2 = Player(0)
-        self.ball = Ball()
-
-        self.ai_move_rate = 2
-        self.frames_until_ai_move = self.ai_move_rate
-
-        self.bg_color = 255, 255, 255
-        self.fg_color = 0, 0, 0
-
-        self.title = "Pong"
-
-        self.show_menu = True
-        self.paused = False
+        self.clock = pygame.time.Clock()
 
         self.mouse_pos = pygame.mouse.get_pos()
 
-        self.clock = pygame.time.Clock()
+        self.font = pygame.font.Font("data/gfx/atari.otf", 50)
+        self.font_big = pygame.font.Font("data/gfx/atari.otf", 100)
+        self.font_small = pygame.font.Font("data/gfx/atari.otf", 25)
+        self.font_tiny = pygame.font.Font("data/gfx/atari.otf", 10)
 
         self.sound_paddle = pygame.mixer.Sound("data/sfx/paddle.wav")
         self.sound_wall = pygame.mixer.Sound("data/sfx/wall.wav")
         self.sound_score = pygame.mixer.Sound("data/sfx/score.wav")
 
         opt_h = 150
-        self.menu_option1_rect = pygame.Rect(0, opt_h, SCREEN_W, opt_h)
-        self.menu_option2_rect = pygame.Rect(0, opt_h * 2, SCREEN_W, opt_h)
-        self.menu_option3_rect = pygame.Rect(0, opt_h * 3, SCREEN_W, opt_h)
-        self.menu_option1_selected = False
-        self.menu_option2_selected = False
-        self.menu_option3_selected = True
+        self.help_rect = pygame.Rect(0, 0, SCREEN_W, opt_h)
+        self.opt1_rect = pygame.Rect(0, opt_h, SCREEN_W, opt_h)
+        self.opt2_rect = pygame.Rect(0, opt_h * 2, SCREEN_W, opt_h)
+        self.opt3_rect = pygame.Rect(0, opt_h * 3, SCREEN_W, opt_h)
+
+        self.show_help_menu = False
+        self.opt1_selected = False
+        self.opt2_selected = False
+        self.opt3_selected = True
+
+        self.show_menu = True
+        self.paused = False
+
+        self.bg_color = 255, 255, 255
+        self.fg_color = 0, 0, 0
+        self.red = 255, 0, 0
+        self.blue = 0, 0, 255
+
+        self.p1 = Player(1, self.blue)
+        self.p2 = Player(0, self.red)
+        self.ball = Ball()
+
+        self.title = "Pong"
 
     def set_window_properties(self):
         pygame.display.set_caption(self.title)
@@ -255,7 +255,7 @@ class Pong:
         self.p1.reset_score()
         self.p2.reset_score()
 
-        if self.menu_option2_selected:
+        if self.opt2_selected:
             self.p2.id = 2
         else:
             self.p2.id = 0
@@ -270,44 +270,56 @@ class Pong:
 
         pygame.mouse.set_visible(False)
 
-    def keyboard_select(self, button):
+    def menu_keyboard_select(self, button):
         if not self.show_menu: return
 
-        if button == pygame.K_1:
-            self.menu_option1_selected = True
+        if self.show_help_menu:
+            self.show_help_menu = not self.show_help_menu
 
-        if button == pygame.K_2:
-            self.menu_option2_selected = True
+        elif button == pygame.K_c:
+            self.show_help_menu = not self.show_help_menu
 
-        if button == pygame.K_3:
-            self.menu_option3_selected = not self.menu_option3_selected
+        elif button == pygame.K_1 and not self.show_help_menu:
+            self.opt1_selected = True
 
-            if self.menu_option3_selected: self.sound_paddle.play()
+        elif button == pygame.K_2 and not self.show_help_menu:
+            self.opt2_selected = True
 
-        if self.menu_option1_selected or self.menu_option2_selected:
+        elif button == pygame.K_3 and not self.show_help_menu:
+            self.opt3_selected = not self.opt3_selected
+
+            if self.opt3_selected: self.sound_paddle.play()
+
+        if self.opt1_selected or self.opt2_selected:
             self.start_new_game()
 
-    def mouse_select(self, pos, button):
+    def menu_mouse_select(self, pos, button):
         if not self.show_menu: return
         if button != 1: return
 
-        if self.menu_option1_rect.collidepoint(pos):
-            self.menu_option1_selected = True
+        if self.show_help_menu:
+            self.show_help_menu = not self.show_help_menu
 
-        if self.menu_option2_rect.collidepoint(pos):
-            self.menu_option2_selected = True
+        elif self.help_rect.collidepoint(pos):
+            self.show_help_menu = not self.show_help_menu
 
-        if self.menu_option3_rect.collidepoint(pos):
-            self.menu_option3_selected = not self.menu_option3_selected
+        elif self.opt1_rect.collidepoint(pos) and not self.show_help_menu:
+            self.opt1_selected = True
 
-            if self.menu_option3_selected: self.sound_paddle.play()
+        elif self.opt2_rect.collidepoint(pos) and not self.show_help_menu:
+            self.opt2_selected = True
 
-        if self.menu_option1_selected or self.menu_option2_selected:
+        elif self.opt3_rect.collidepoint(pos) and not self.show_help_menu:
+            self.opt3_selected = not self.opt3_selected
+
+            if self.opt3_selected: self.sound_paddle.play()
+
+        if self.opt1_selected or self.opt2_selected:
             self.start_new_game()
 
     def go_to_menu(self):
-        self.menu_option1_selected = False
-        self.menu_option2_selected = False
+        self.opt1_selected = False
+        self.opt2_selected = False
 
         self.show_menu = True
 
@@ -322,10 +334,10 @@ class Pong:
             if event.key == pygame.K_ESCAPE: exit()
             elif event.key == pygame.K_p: self.toggle_pause()
             elif event.key == pygame.K_m: self.go_to_menu()
-            else: self.keyboard_select(event.key)
+            else: self.menu_keyboard_select(event.key)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            self.mouse_select(event.pos, event.button)
+            self.menu_mouse_select(event.pos, event.button)
 
     def give_victory(self, player):
         player.winner = True
@@ -346,7 +358,7 @@ class Pong:
             self.p1.score += 1
             self.ball.reset()
 
-            if self.menu_option3_selected: self.sound_score.play()
+            if self.opt3_selected: self.sound_score.play()
 
             self.check_for_winner(self.p1)
 
@@ -354,7 +366,7 @@ class Pong:
             self.p2.score += 1
             self.ball.reset()
 
-            if self.menu_option3_selected: self.sound_score.play()
+            if self.opt3_selected: self.sound_score.play()
 
             self.check_for_winner(self.p2)
 
@@ -413,10 +425,10 @@ class Pong:
     def update_ball_position(self):
         self.check_for_score()
 
-        if self.ball.bflag_edge and self.menu_option3_selected:
+        if self.ball.bflag_edge and self.opt3_selected:
             self.sound_wall.play()
 
-        if self.ball.bflag_paddle and self.menu_option3_selected:
+        if self.ball.bflag_paddle and self.opt3_selected:
             self.sound_paddle.play()
 
         self.ball.move(self.p1.paddle, self.p2.paddle)
@@ -450,7 +462,11 @@ class Pong:
         s2_rect = score2.get_rect(midtop = s2_pos)
         self.surface.blit(score2, s2_rect)
 
-    def draw_paddles(self):
+    def draw_paddles(self, help_menu=False):
+        if help_menu:
+            self.p1.paddle.center = SCREEN_W >> 2, SCREEN_H >> 1
+            self.p2.paddle.center = (SCREEN_W >> 2) * 3, SCREEN_H >> 1
+
         pygame.draw.rect(self.surface, self.p1.color, self.p1.paddle)
         pygame.draw.rect(self.surface, self.p2.color, self.p2.paddle)
 
@@ -463,43 +479,46 @@ class Pong:
 
     def draw_title(self):
         text = self.font_big.render(self.title, 1, self.fg_color)
-        tpos = SCREEN_W >> 1, 15
-        trect = text.get_rect(midtop = tpos)
+        tpos = self.help_rect.center
+        trect = text.get_rect(center = tpos)
         self.surface.blit(text, trect)
 
     def draw_options(self):
         option1 = "(1) One Player"
-        option1_color = 0, 0, 255
-        option1_text = self.font.render(option1, 1, option1_color)
-        option1_pos = self.menu_option1_rect.center
-        option1_rect = option1_text.get_rect(center = option1_pos)
+        option1_text = self.font.render(option1, 1, self.blue)
+        option1_rect = option1_text.get_rect(center = self.opt1_rect.center)
 
         option2 = "(2) Two Players"
-        option2_color = 255, 0, 0
-        option2_text = self.font.render(option2, 1, option2_color)
-        option2_pos = self.menu_option2_rect.center
-        option2_rect = option2_text.get_rect(center = option2_pos)
+        option2_text = self.font.render(option2, 1, self.red)
+        option2_rect = option2_text.get_rect(center = self.opt2_rect.center)
 
-        if self.menu_option3_selected:
+        if self.opt3_selected:
             option3 = "(3) Sound: On"
         else:
             option3 = "(3) Sound: Off"
 
         option3_text = self.font.render(option3, 1, self.fg_color)
-        option3_pos = self.menu_option3_rect.center
-        option3_rect = option3_text.get_rect(center = option3_pos)
+        option3_rect = option3_text.get_rect(center = self.opt3_rect.center)
 
         self.surface.blit(option1_text, option1_rect)
         self.surface.blit(option2_text, option2_rect)
         self.surface.blit(option3_text, option3_rect)
 
+        controls = "Press C or click here for controls"
+
+        ctext = self.font_tiny.render(controls, 1, self.fg_color)
+        ctpos = SCREEN_W - 3, 0
+        ctrect = ctext.get_rect(topright = ctpos)
+
+        self.surface.blit(ctext, ctrect)
+
     def draw_info(self):
         disclaimer = "MIT License Copyright (c) 2022 Jacob Alexander Thompson"
 
-        text = self.font_small.render(disclaimer, 1, self.fg_color)
-        tpos = 3, SCREEN_H
-        trect = text.get_rect(bottomleft = tpos)
-        self.surface.blit(text, trect)
+        dtext = self.font_tiny.render(disclaimer, 1, self.fg_color)
+        dtpos = 3, SCREEN_H
+        dtrect = dtext.get_rect(bottomleft = dtpos)
+        self.surface.blit(dtext, dtrect)
 
     def draw_menu(self):
         self.draw_background()
@@ -507,8 +526,91 @@ class Pong:
         self.draw_options()
         self.draw_info()
 
+    def draw_arrow(self, surface, start_pos, end_pos, color):
+        body_w = 5
+        head_w = 20
+        head_h = 10
+
+        start = pygame.math.Vector2(start_pos)
+        end = pygame.math.Vector2(end_pos)
+
+        arrow = start - end
+        angle = arrow.angle_to(pygame.Vector2(0, -1))
+        body_len = int(arrow.length()) - head_h
+
+        head_verts = [
+            pygame.Vector2(0, head_h >> 1),
+            pygame.Vector2(head_w >> 1, -head_h >> 1),
+            pygame.Vector2(-head_w >> 1, -head_h >> 1),
+        ]
+
+        translation = pygame.Vector2(0, arrow.length() - (head_h >> 1)).rotate(-angle)
+        for i in range(len(head_verts)):
+            head_verts[i].rotate_ip(-angle)
+            head_verts[i] += translation
+            head_verts[i] += start
+
+        pygame.draw.polygon(surface, color, head_verts)
+
+        if arrow.length() >= head_h:
+            body_verts = [
+                pygame.Vector2(-body_w >> 1, body_len >> 1),
+                pygame.Vector2(body_w >> 1, body_len >> 1),
+                pygame.Vector2(body_w >> 1, -body_len >> 1),
+                pygame.Vector2(-body_w >> 1, -body_len >> 1),
+            ]
+
+            translation = pygame.Vector2(0, body_len >> 1).rotate(-angle)
+            for i in range(len(body_verts)):
+                body_verts[i].rotate_ip(-angle)
+                body_verts[i] += translation
+                body_verts[i] += start
+
+            pygame.draw.polygon(surface, color, body_verts)
+
+    def draw_help_arrows(self):
+        gap = 30
+        arrow_len = 100
+
+        p1_up_spos = self.p1.paddle.centerx, self.p1.paddle.top - gap
+        p1_up_epos = self.p1.paddle.centerx, self.p1.paddle.top - gap - arrow_len
+        p1_down_spos = self.p1.paddle.centerx, self.p1.paddle.bottom + gap
+        p1_down_epos = self.p1.paddle.centerx, self.p1.paddle.bottom + gap + arrow_len
+
+        p2_up_spos = self.p2.paddle.centerx, self.p2.paddle.top - gap
+        p2_up_epos = self.p2.paddle.centerx, self.p2.paddle.top - gap - arrow_len
+        p2_down_spos = self.p2.paddle.centerx, self.p2.paddle.bottom + gap
+        p2_down_epos = self.p2.paddle.centerx, self.p2.paddle.bottom + gap + arrow_len
+
+        self.draw_arrow(self.surface, p1_up_spos, p1_up_epos, self.fg_color)
+        self.draw_arrow(self.surface, p1_down_spos, p1_down_epos, self.fg_color)
+        self.draw_arrow(self.surface, p2_up_spos, p2_up_epos, self.fg_color)
+        self.draw_arrow(self.surface, p2_down_spos, p2_down_epos, self.fg_color)
+
+    def draw_help_text(self):
+        p1 = "Player 1"
+        p1_text = self.font.render(p1, 1, self.blue)
+        p1_pos = self.p1.paddle.centerx, 0
+        p1_rect = p1_text.get_rect(midtop = p1_pos)
+
+        p2 = "Player 2"
+        p2_text = self.font.render(p2, 1, self.red)
+        p2_pos = self.p2.paddle.centerx, 0
+        p2_rect = p2_text.get_rect(midtop = p2_pos)
+
+        self.surface.blit(p1_text, p1_rect)
+        self.surface.blit(p2_text, p2_rect)
+
+    def draw_help_menu(self):
+        self.draw_background()
+        self.draw_paddles(True)
+        self.draw_help_arrows()
+        self.draw_help_text()
+
     def draw_frame(self):
-        if self.show_menu:
+        if self.show_help_menu:
+            self.draw_help_menu()
+        elif self.show_menu and not self.show_help_menu:
             self.draw_menu()
         else:
             self.draw_game()
