@@ -581,11 +581,6 @@ class Pong:
         self.draw_arrow(self.surface, p2_down_spos, p2_down_epos, self.fg_color)
 
     def draw_help_text(self):
-        cmdleft = (SCREEN_W >> 3) * 3
-        cmdright = (SCREEN_W >> 3) * 5
-        cmdup = SCREEN_H >> 2
-        cmddown = cmdup * 3
-
         hmenu = "Pong controls"
         hmenu_text = self.font_small.render(hmenu, 1, self.fg_color)
         hmenu_pos = SCREEN_W >> 1, 0
@@ -603,6 +598,11 @@ class Pong:
         menu_pos = self.p2.paddle.centerx, SCREEN_H >> 3
         menu_rect = menu_text.get_rect(center = menu_pos)
         self.surface.blit(menu_text, menu_rect)
+
+        cmdleft = (SCREEN_W >> 3) * 3
+        cmdright = (SCREEN_W >> 3) * 5
+        cmdup = SCREEN_H >> 2
+        cmddown = cmdup * 3
 
         wkey = "W"
         wkey_text = self.font_small.render(wkey, 1, self.fg_color)

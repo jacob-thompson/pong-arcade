@@ -97,14 +97,14 @@ Controls can be brought up in-game by pressing `C` on the menu screen.
 
 ### In-Game
 
-#### Movement
+##### Movement
 
 * `W` Move Player1 up
 * `S` Move Player1 down
 * `Up` Move Player2 or Player1 up
 * `Down` Move Player2 or Player1 down
 
-#### Pause/Quit
+##### Pause/Quit
 
 * `P` Pause the game
 * `M` Bring up the menu (Exit current game)
