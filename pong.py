@@ -3,6 +3,7 @@ import pygame
 from random import randint
 from sys import exit
 
+
 SCREEN_SIZE = SCREEN_W, SCREEN_H = 800, 600
 
 
@@ -703,6 +704,7 @@ def main():
 
         pong.draw_frame()
         pong.update_frame()
+
 
 if __name__ == "__main__":
     main()
