@@ -658,11 +658,24 @@ class Pong:
         self.draw_help_arrows()
         self.draw_help_text()
 
+    def draw_paused_screen(self):
+        self.draw_background()
+
+        paused = "Paused"
+        paused_text = self.font.render(paused, 1, self.fg_color)
+        paused_pos = SCREEN_W >> 1, SCREEN_H >> 1
+        paused_rect = paused_text.get_rect(center = paused_pos)
+        self.surface.blit(paused_text, paused_rect)
+
+        self.draw_paddles()
+
     def draw_frame(self):
         if self.show_help_menu:
             self.draw_help_menu()
         elif self.show_menu and not self.show_help_menu:
             self.draw_menu()
+        elif self.paused:
+            self.draw_paused_screen()
         else:
             self.draw_game()
 
