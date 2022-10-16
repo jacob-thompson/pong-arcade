@@ -582,19 +582,19 @@ class Pong:
         self.draw_arrow(self.surface, p2_down_spos, p2_down_epos, self.fg_color)
 
     def draw_help_text(self):
-        hmenu = "Pong controls"
+        hmenu = "Pong Control Menu"
         hmenu_text = self.font_small.render(hmenu, 1, self.fg_color)
         hmenu_pos = SCREEN_W >> 1, 0
         hmenu_rect = hmenu_text.get_rect(midtop = hmenu_pos)
         self.surface.blit(hmenu_text, hmenu_rect)
 
-        pause = "P  -  Pause game"
+        pause = "P  -  Pause"
         pause_text = self.font_small.render(pause, 1, self.fg_color)
         pause_pos = self.p1.paddle.centerx, SCREEN_H >> 3
         pause_rect = pause_text.get_rect(center = pause_pos)
         self.surface.blit(pause_text, pause_rect)
 
-        menu = "Show menu  -  M"
+        menu = "Menu  -  M"
         menu_text = self.font_small.render(menu, 1, self.fg_color)
         menu_pos = self.p2.paddle.centerx, SCREEN_H >> 3
         menu_rect = menu_text.get_rect(center = menu_pos)
@@ -641,7 +641,7 @@ class Pong:
         p2_rect = p2_text.get_rect(center = p2_pos)
         self.surface.blit(p2_text, p2_rect)
 
-        info = "Player1 may use arrow keys in single-player games"
+        info = "Player1 may use arrow keys in single-player games."
         info_text = self.font_small.render(info, 1, self.fg_color)
         info_pos = SCREEN_W >> 1, SCREEN_H - (SCREEN_H >> 3)
         info_rect = info_text.get_rect(center = info_pos)
