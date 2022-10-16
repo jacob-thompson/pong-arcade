@@ -244,7 +244,7 @@ class Pong:
         pygame.display.set_icon(icon)
 
     def print_help_info(self):
-        print("Pong -- https://github.com/jacob-thompson/Pong")
+        print("Thanks for playing Pong! https://github.com/jacob-thompson/Pong")
 
     def reset_game(self):
         self.p1.set_paddle_pos()
@@ -326,9 +326,13 @@ class Pong:
         if event.type == pygame.KEYDOWN:
             self.menu_keyboard_select(event.key)
 
-            if event.key == pygame.K_ESCAPE: exit()
-            elif event.key == pygame.K_p: self.toggle_pause()
-            elif event.key == pygame.K_m: self.go_to_menu()
+            close = event.key == pygame.K_ESCAPE
+            pause = event.key == pygame.K_p or event.key == pygame.K_q
+            menu = event.key == pygame.K_m or event.key == pygame.K_z
+
+            if close: exit()
+            elif pause: self.toggle_pause()
+            elif menu: self.go_to_menu()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             self.menu_mouse_select(event.pos, event.button)
@@ -393,22 +397,22 @@ class Pong:
 
         speed = 10
 
-        if keys[pygame.K_w]:
+        if keys[pygame.K_e]:
             self.p1.paddle.y -= speed
 
-        if keys[pygame.K_s]:
+        if keys[pygame.K_d]:
             self.p1.paddle.y += speed
 
         one_player = self.p2.id == 0
 
-        if keys[pygame.K_UP] and one_player:
+        if keys[pygame.K_i] and one_player:
             self.p1.paddle.y -= speed
-        elif keys[pygame.K_UP]:
+        elif keys[pygame.K_i]:
             self.p2.paddle.y -= speed
 
-        if keys[pygame.K_DOWN] and one_player:
+        if keys[pygame.K_k] and one_player:
             self.p1.paddle.y += speed
-        elif keys[pygame.K_DOWN]:
+        elif keys[pygame.K_k]:
             self.p2.paddle.y += speed
 
         if one_player:
@@ -582,19 +586,19 @@ class Pong:
         self.draw_arrow(self.surface, p2_down_spos, p2_down_epos, self.fg_color)
 
     def draw_help_text(self):
-        hmenu = "Pong Control Menu"
+        hmenu = "Pong Controls"
         hmenu_text = self.font_small.render(hmenu, 1, self.fg_color)
         hmenu_pos = SCREEN_W >> 1, 0
         hmenu_rect = hmenu_text.get_rect(midtop = hmenu_pos)
         self.surface.blit(hmenu_text, hmenu_rect)
 
-        pause = "P  -  Pause"
+        pause = "P or Q  -  Pause"
         pause_text = self.font_small.render(pause, 1, self.fg_color)
         pause_pos = self.p1.paddle.centerx, SCREEN_H >> 3
         pause_rect = pause_text.get_rect(center = pause_pos)
         self.surface.blit(pause_text, pause_rect)
 
-        menu = "Menu  -  M"
+        menu = "Menu  -  M or Z"
         menu_text = self.font_small.render(menu, 1, self.fg_color)
         menu_pos = self.p2.paddle.centerx, SCREEN_H >> 3
         menu_rect = menu_text.get_rect(center = menu_pos)
@@ -605,29 +609,29 @@ class Pong:
         cmdup = SCREEN_H >> 2
         cmddown = cmdup * 3
 
-        wkey = "W"
-        wkey_text = self.font_small.render(wkey, 1, self.fg_color)
-        wkey_pos = cmdleft, cmdup
-        wkey_rect = wkey_text.get_rect(center = wkey_pos)
-        self.surface.blit(wkey_text, wkey_rect)
+        ekey = "E"
+        ekey_text = self.font_small.render(ekey, 1, self.fg_color)
+        ekey_pos = cmdleft, cmdup
+        ekey_rect = ekey_text.get_rect(center = ekey_pos)
+        self.surface.blit(ekey_text, ekey_rect)
 
-        skey = "S"
-        skey_text = self.font_small.render(skey, 1, self.fg_color)
-        skey_pos = cmdleft, cmddown
-        skey_rect = skey_text.get_rect(center = skey_pos)
-        self.surface.blit(skey_text, skey_rect)
+        dkey = "D"
+        dkey_text = self.font_small.render(dkey, 1, self.fg_color)
+        dkey_pos = cmdleft, cmddown
+        dkey_rect = dkey_text.get_rect(center = dkey_pos)
+        self.surface.blit(dkey_text, dkey_rect)
 
-        uarr = "Up"
-        uarr_text = self.font_small.render(uarr, 1, self.fg_color)
-        uarr_pos = cmdright, cmdup
-        uarr_rect = uarr_text.get_rect(center = uarr_pos)
-        self.surface.blit(uarr_text, uarr_rect)
+        ikey = "I"
+        ikey_text = self.font_small.render(ikey, 1, self.fg_color)
+        ikey_pos = cmdright, cmdup
+        ikey_rect = ikey_text.get_rect(center = ikey_pos)
+        self.surface.blit(ikey_text, ikey_rect)
 
-        darr = "Down"
-        darr_text = self.font_small.render(darr, 1, self.fg_color)
-        darr_pos = cmdright, cmddown
-        darr_rect = darr_text.get_rect(center = darr_pos)
-        self.surface.blit(darr_text, darr_rect)
+        kkey = "K"
+        kkey_text = self.font_small.render(kkey, 1, self.fg_color)
+        kkey_pos = cmdright, cmddown
+        kkey_rect = kkey_text.get_rect(center = kkey_pos)
+        self.surface.blit(kkey_text, kkey_rect)
 
         p1 = "Player 1"
         p1_text = self.font_small.render(p1, 1, self.blue)
@@ -641,7 +645,7 @@ class Pong:
         p2_rect = p2_text.get_rect(center = p2_pos)
         self.surface.blit(p2_text, p2_rect)
 
-        info = "Player1 may use arrow keys in single-player games."
+        info = "Player1 may use either keys in single-player games."
         info_text = self.font_small.render(info, 1, self.fg_color)
         info_pos = SCREEN_W >> 1, SCREEN_H - (SCREEN_H >> 3)
         info_rect = info_text.get_rect(center = info_pos)
