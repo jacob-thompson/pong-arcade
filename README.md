@@ -99,8 +99,8 @@ Controls can be brought up in-game by pressing `C` on the menu screen.
 
 ##### Movement
 
-* `E` Move Player1 up
-* `D` Move Player1 down
+* `W` Move Player1 up
+* `S` Move Player1 down
 * `I` Move Player2 (or Player1 in single-player) up
 * `K` Move Player2 (or Player1 in single-player) down
 

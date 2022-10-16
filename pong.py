@@ -397,10 +397,10 @@ class Pong:
 
         speed = 10
 
-        if keys[pygame.K_e]:
+        if keys[pygame.K_w]:
             self.p1.paddle.y -= speed
 
-        if keys[pygame.K_d]:
+        if keys[pygame.K_s]:
             self.p1.paddle.y += speed
 
         one_player = self.p2.id == 0
@@ -609,17 +609,17 @@ class Pong:
         cmdup = SCREEN_H >> 2
         cmddown = cmdup * 3
 
-        ekey = "E"
-        ekey_text = self.font_small.render(ekey, 1, self.fg_color)
-        ekey_pos = cmdleft, cmdup
-        ekey_rect = ekey_text.get_rect(center = ekey_pos)
-        self.surface.blit(ekey_text, ekey_rect)
+        wkey = "W"
+        wkey_text = self.font_small.render(wkey, 1, self.fg_color)
+        wkey_pos = cmdleft, cmdup
+        wkey_rect = wkey_text.get_rect(center = wkey_pos)
+        self.surface.blit(wkey_text, wkey_rect)
 
-        dkey = "D"
-        dkey_text = self.font_small.render(dkey, 1, self.fg_color)
-        dkey_pos = cmdleft, cmddown
-        dkey_rect = dkey_text.get_rect(center = dkey_pos)
-        self.surface.blit(dkey_text, dkey_rect)
+        skey = "S"
+        skey_text = self.font_small.render(skey, 1, self.fg_color)
+        skey_pos = cmdleft, cmddown
+        skey_rect = skey_text.get_rect(center = skey_pos)
+        self.surface.blit(skey_text, skey_rect)
 
         ikey = "I"
         ikey_text = self.font_small.render(ikey, 1, self.fg_color)
