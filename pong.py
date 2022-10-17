@@ -5,6 +5,7 @@ from sys import exit
 
 
 SCREEN_SIZE = SCREEN_W, SCREEN_H = 800, 600
+FPS = 60
 
 
 class Ball:
@@ -243,7 +244,7 @@ class Pong:
         icon = pygame.image.load("data/gfx/logo.png")
         pygame.display.set_icon(icon)
 
-    def print_help_info(self):
+    def print_info(self):
         print("Thanks for playing Pong! https://github.com/jacob-thompson/Pong")
 
     def reset_game(self):
@@ -320,7 +321,7 @@ class Pong:
         if not self.show_menu:
             self.paused = not self.paused
 
-    def handle(self, event):
+    def handle_event(self, event):
         if event.type == pygame.QUIT: exit()
 
         if event.type == pygame.KEYDOWN:
@@ -368,8 +369,8 @@ class Pong:
 
             self.check_for_winner(self.p2)
 
-    def tick(self, frame_rate):
-        self.clock.tick(frame_rate)
+    def tick(self):
+        self.clock.tick(FPS)
 
     def ensure_boundaries(self):
         self.p1.ensure_in_bound_bot()
@@ -692,15 +693,13 @@ def main():
     pong = Pong()
 
     pong.set_window_properties()
-    pong.print_help_info()
-
-    frame_rate = 60
+    pong.print_info()
 
     while 1:
-        for event in pygame.event.get():
-            pong.handle(event)
+        pong.tick()
 
-        pong.tick(frame_rate)
+        for event in pygame.event.get():
+            pong.handle_event(event)
 
         if not pong.show_menu and not pong.paused:
             pong.update_paddle_position()
