@@ -227,6 +227,8 @@ class Pong:
         self.show_menu = True
         self.paused = False
 
+        self.show_win_screen = False
+
         self.bg_color = 255, 255, 255
         self.fg_color = 0, 0, 0
         self.red = 255, 0, 0
@@ -273,6 +275,11 @@ class Pong:
         pygame.mouse.set_visible(False)
 
     def menu_keyboard_select(self, button):
+        if self.show_win_screen:
+            self.show_win_screen = not self.show_win_screen
+            self.go_to_menu()
+            return
+
         if not self.show_menu: return
 
         if self.show_help_menu:
@@ -292,6 +299,11 @@ class Pong:
             self.start_new_game()
 
     def menu_mouse_select(self, pos, button):
+        if self.show_win_screen:
+            self.show_win_screen = not self.show_win_screen
+            self.go_to_menu()
+            return
+
         if not self.show_menu: return
         if button != 1: return
 
@@ -338,10 +350,15 @@ class Pong:
         if event.type == pygame.MOUSEBUTTONDOWN:
             self.menu_mouse_select(event.pos, event.button)
 
+    def is_winner(self):
+        return self.p1.winner or self.p2.winner
+
+    def game_in_progress(self):
+        return not self.show_menu and not self.paused and not self.is_winner()
+
     def give_victory(self, player):
         player.winner = True
-
-        self.go_to_menu()
+        self.show_win_screen = True
 
         pygame.mouse.set_visible(True)
 
@@ -675,6 +692,32 @@ class Pong:
 
         self.draw_paddles()
 
+    def draw_win_screen(self):
+        self.draw_background()
+
+        if self.p1.winner:
+            pwinner = "Player 1 wins!"
+            pcolor = self.p1.color
+            ppaddle = self.p1.paddle
+        else:
+            pwinner = "Player 2 wins!"
+            pcolor = self.p2.color
+            ppaddle = self.p2.paddle
+
+        pwinner_text = self.font.render(pwinner, 1, pcolor)
+        pwinner_pos = SCREEN_W >> 1, SCREEN_H >> 2
+        pwinner_rect = pwinner_text.get_rect(center = pwinner_pos)
+        self.surface.blit(pwinner_text, pwinner_rect)
+
+        cont = "Press any button to continue"
+        cont_text = self.font_small.render(cont, 1, self.fg_color)
+        cont_pos = SCREEN_W >> 1, SCREEN_H - (SCREEN_H >> 2)
+        cont_rect = cont_text.get_rect(center = cont_pos)
+        self.surface.blit(cont_text, cont_rect)
+
+        ppaddle.center = SCREEN_W >> 1, SCREEN_H >> 1
+        pygame.draw.rect(self.surface, pcolor, ppaddle)
+
     def draw_frame(self):
         if self.show_help_menu:
             self.draw_help_menu()
@@ -682,6 +725,8 @@ class Pong:
             self.draw_menu()
         elif self.paused:
             self.draw_paused_screen()
+        elif self.show_win_screen:
+            self.draw_win_screen()
         else:
             self.draw_game()
 
@@ -701,7 +746,7 @@ def main():
         for event in pygame.event.get():
             pong.handle_event(event)
 
-        if not pong.show_menu and not pong.paused:
+        if pong.game_in_progress():
             pong.update_paddle_position()
             pong.update_ball_position()
 
