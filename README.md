@@ -90,7 +90,7 @@ Controls can be brought up in-game by pressing `C` on the menu screen.
 
 ### Menu
 
-* `C` Show controls menu
+* `C` Show controls
 * `1` Select first option (One player)
 * `2` Select second option (Two players)
 * `3` Toggle third option (Sound)
