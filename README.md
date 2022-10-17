@@ -97,7 +97,7 @@ Controls can be brought up in-game by pressing `C` on the menu screen.
 
 ### In-Game
 
-[![Controls Screenshot][controls-screenshot]](https://github.com/jacob-thompson/Pong)
+[![Controls Screenshot][controls-screenshot]](https://github.com/jacob-thompson/Pong/raw/main/data/gfx/controls.png)
 
 ##### Movement
 
