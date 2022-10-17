@@ -97,6 +97,8 @@ Controls can be brought up in-game by pressing `C` on the menu screen.
 
 ### In-Game
 
+[![Controls Screenshot][controls-screenshot]](https://github.com/jacob-thompson/Pong)
+
 ##### Movement
 
 * `W` Move Player1 up
@@ -139,3 +141,4 @@ Project Link - [jacob-thompson/Pong](https://github.com/jacob-thompson/Pong)
 [license-shield]: https://img.shields.io/github/license/jacob-thompson/Pong.svg?style=flat
 [license-url]: https://github.com/jacob-thompson/Pong/blob/main/LICENSE
 [product-screenshot]: data/gfx/screenshot.png
+[controls-screenshot]: data/gfx/controls.png
