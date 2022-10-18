@@ -140,5 +140,5 @@ Project Link - [jacob-thompson/pong-atari](https://github.com/jacob-thompson/pon
 [issues-url]: https://github.com/jacob-thompson/pong-atari/issues
 [license-shield]: https://img.shields.io/github/license/jacob-thompson/Pong.svg?style=flat
 [license-url]: https://github.com/jacob-thompson/pong-atari/blob/main/LICENSE
-[product-screenshot]: data/gfx/screenshot.png
-[controls-screenshot]: data/gfx/controls.png
+[product-screenshot]: pong-atari/data/gfx/screenshot.png
+[controls-screenshot]: pong-atari/data/gfx/controls.png
