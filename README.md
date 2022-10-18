@@ -125,7 +125,7 @@ Distributed under the MIT License. See `LICENSE` or click [here](https://github.
 
 Jacob Alexander Thompson - jacobalthompson@gmail.com
 
-Project Link - [jacob-thompson/Pong](https://github.com/jacob-thompson/pong-atari)
+Project Link - [jacob-thompson/pong-atari](https://github.com/jacob-thompson/pong-atari)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -140,5 +140,5 @@ Project Link - [jacob-thompson/Pong](https://github.com/jacob-thompson/pong-atar
 [issues-url]: https://github.com/jacob-thompson/pong-atari/issues
 [license-shield]: https://img.shields.io/github/license/jacob-thompson/Pong.svg?style=flat
 [license-url]: https://github.com/jacob-thompson/pong-atari/blob/main/LICENSE
-[product-screenshot]: pong-atari/data/gfx/screenshot.png
-[controls-screenshot]: pong-atari/data/gfx/controls.png
+[product-screenshot]: data/gfx/screenshot.png
+[controls-screenshot]: data/gfx/controls.png
