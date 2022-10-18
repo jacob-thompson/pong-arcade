@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/jacob-thompson/pong-atari">
-    <img src="data/gfx/logo.png" alt="Logo" width="80" height="80">
+    <img src="pong-atari/data/gfx/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">pong-atari</h3>
