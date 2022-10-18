@@ -10,11 +10,11 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/jacob-thompson/Pong">
+  <a href="https://github.com/jacob-thompson/pong-atari">
     <img src="data/gfx/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Pong</h3>
+  <h3 align="center">pong-atari</h3>
 
   <p align="center">
     Pong written using pygame
@@ -48,9 +48,9 @@
 
 ## About The Project
 
-[![Pong Screenshot][product-screenshot]](https://github.com/jacob-thompson/Pong/raw/main/data/gfx/screenshot.png)
+[![Pong Screenshot][product-screenshot]](https://github.com/jacob-thompson/pong-atari/raw/main/data/gfx/screenshot.png)
 
-This executable program is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This implementation was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/Pong/tree/main/data).
+This executable program is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This implementation was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/pong-atari/tree/main/data).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -71,7 +71,7 @@ pip install -r requirements.txt
 
 To download the source code, clone the repository:
 ```sh
-git clone https://github.com/jacob-thompson/Pong.git
+git clone https://github.com/jacob-thompson/pong-atari.git
 ```
 
 ### Run
@@ -97,7 +97,7 @@ Controls can be brought up in-game by pressing `C` on the menu screen.
 
 ### In-Game
 
-[![Controls Screenshot][controls-screenshot]](https://github.com/jacob-thompson/Pong/raw/main/data/gfx/controls.png)
+[![Controls Screenshot][controls-screenshot]](https://github.com/jacob-thompson/pong-atari/raw/main/data/gfx/controls.png)
 
 ##### Movement
 
@@ -116,7 +116,7 @@ Controls can be brought up in-game by pressing `C` on the menu screen.
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` or click [here](https://github.com/jacob-thompson/Pong/blob/main/LICENSE) for more information.
+Distributed under the MIT License. See `LICENSE` or click [here](https://github.com/jacob-thompson/pong-atari/blob/main/LICENSE) for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -125,20 +125,20 @@ Distributed under the MIT License. See `LICENSE` or click [here](https://github.
 
 Jacob Alexander Thompson - jacobalthompson@gmail.com
 
-Project Link - [jacob-thompson/Pong](https://github.com/jacob-thompson/Pong)
+Project Link - [jacob-thompson/Pong](https://github.com/jacob-thompson/pong-atari)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/jacob-thompson/Pong.svg?style=flat
-[contributors-url]: https://github.com/jacob-thompson/Pong/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/jacob-thompson/Pong.svg?style=flat
-[forks-url]: https://github.com/jacob-thompson/Pong/network/members
-[stars-shield]: https://img.shields.io/github/stars/jacob-thompson/Pong.svg?style=flat
-[stars-url]: https://github.com/jacob-thompson/Pong/stargazers
+[contributors-shield]: https://img.shields.io/github/contributors/jacob-thompson/pong-atari.svg?style=flat
+[contributors-url]: https://github.com/jacob-thompson/pong-atari/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jacob-thompson/pong-atari.svg?style=flat
+[forks-url]: https://github.com/jacob-thompson/pong-atari/network/members
+[stars-shield]: https://img.shields.io/github/stars/jacob-thompson/pong-atari.svg?style=flat
+[stars-url]: https://github.com/jacob-thompson/pong-atari/stargazers
 [issues-shield]: https://img.shields.io/github/issues/jacob-thompson/Pong.svg?style=flat
-[issues-url]: https://github.com/jacob-thompson/Pong/issues
+[issues-url]: https://github.com/jacob-thompson/pong-atari/issues
 [license-shield]: https://img.shields.io/github/license/jacob-thompson/Pong.svg?style=flat
-[license-url]: https://github.com/jacob-thompson/Pong/blob/main/LICENSE
-[product-screenshot]: data/gfx/screenshot.png
-[controls-screenshot]: data/gfx/controls.png
+[license-url]: https://github.com/jacob-thompson/pong-atari/blob/main/LICENSE
+[product-screenshot]: pong-atari/data/gfx/screenshot.png
+[controls-screenshot]: pong-atari/data/gfx/controls.png
