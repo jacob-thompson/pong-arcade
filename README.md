@@ -1,6 +1,3 @@
-<a name="readme-top"></a>
-
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -52,8 +49,6 @@
 
 This executable program is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This implementation was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/pong-atari/tree/main/data).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ## Getting Started
 
@@ -80,8 +75,6 @@ To execute the program from source, run the script:
 ```sh
 python3 pong.py
 ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Controls
 
@@ -111,14 +104,10 @@ Controls can be brought up in-game by pressing `C` on the menu screen.
 * `P` or `Q` Pause the game
 * `M` or `Z` Bring up the menu (Exits current game)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ## License
 
 Distributed under the MIT License. See `LICENSE` or click [here](https://github.com/jacob-thompson/pong-atari/blob/main/LICENSE) for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Contact
@@ -126,8 +115,6 @@ Distributed under the MIT License. See `LICENSE` or click [here](https://github.
 Jacob Alexander Thompson - jacobalthompson@gmail.com
 
 Project Link - [jacob-thompson/pong-atari](https://github.com/jacob-thompson/pong-atari)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 [contributors-shield]: https://img.shields.io/github/contributors/jacob-thompson/pong-atari.svg?style=flat
