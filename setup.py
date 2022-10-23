@@ -26,11 +26,11 @@ setup(
     install_requires=["pygame"],
     entry_points={
         "console_scripts": [
-            "pong=pong-atari:main",
+            "pong=main.py:main",
         ],
     },
     project_urls={
+        "Home": "https://github.com/jacob-thompson/pong-atari",
         "Bug Reports": "https://github.com/jacob-thompson/pong-atari/issues",
-        "Source": "https://github.com/jacob-thompson/pong-atari",
     },
 )
