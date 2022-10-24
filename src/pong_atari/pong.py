@@ -3,6 +3,7 @@ from .player import Player
 from .ball import Ball
 
 from sys import exit
+import os
 
 import pygame
 
@@ -17,14 +18,20 @@ class Pong:
 
         self.mouse_pos = pygame.mouse.get_pos()
 
-        self.font = pygame.font.Font("data/gfx/atari.otf", 50)
-        self.font_big = pygame.font.Font("data/gfx/atari.otf", 100)
-        self.font_small = pygame.font.Font("data/gfx/atari.otf", 20)
-        self.font_tiny = pygame.font.Font("data/gfx/atari.otf", 10)
+        self.dir, self.file = os.path.split(__file__)
 
-        self.sound_paddle = pygame.mixer.Sound("data/sfx/paddle.wav")
-        self.sound_wall = pygame.mixer.Sound("data/sfx/wall.wav")
-        self.sound_score = pygame.mixer.Sound("data/sfx/score.wav")
+        font_file = os.path.join(self.dir, "data", "gfx", "atari.otf")
+        self.font = pygame.font.Font(font_file, 50)
+        self.font_big = pygame.font.Font(font_file, 100)
+        self.font_small = pygame.font.Font(font_file, 20)
+        self.font_tiny = pygame.font.Font(font_file, 10)
+
+        paddle = os.path.join(self.dir, "data", "sfx", "paddle.wav")
+        self.sound_paddle = pygame.mixer.Sound(paddle)
+        wall = os.path.join(self.dir, "data", "sfx", "wall.wav")
+        self.sound_wall = pygame.mixer.Sound(wall)
+        score = os.path.join(self.dir, "data", "sfx", "score.wav")
+        self.sound_score = pygame.mixer.Sound(score)
 
         opt_h = 150
         self.help_rect = pygame.Rect(0, 0, SCREEN_W, opt_h)
@@ -54,7 +61,9 @@ class Pong:
     def set_window_properties(self):
         pygame.display.set_caption(TITLE)
 
-        icon = pygame.image.load("data/gfx/logo.png")
+        icon_file = os.path.join(self.dir, "data", "gfx", "logo.png")
+        icon = pygame.image.load(icon_file)
+
         pygame.display.set_icon(icon)
 
     def print_info(self):
