@@ -1,4 +1,4 @@
-from pong import Pong
+from .pong import Pong
 
 from pygame import event
 

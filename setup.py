@@ -6,7 +6,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="pong-atari",
-    version="1.0.1",
+    version="1.0.17",
     description="Pong written using pygame",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -15,22 +15,22 @@ setup(
     author_email="jacobalthompson@gmail.com",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Other Audience",
         "Topic :: Games/Entertainment",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.10",
     ],
     keywords="pong, atari, game, retro, executable, application",
-    packages=find_packages(where="pong-atari"),
+    package_dir={"": "src"},
+    packages=find_packages("src"),
+    include_package_data=True,
     python_requires=">=3.10, <4",
     install_requires=["pygame"],
     entry_points={
         "console_scripts": [
-            "pong=main.py:main",
+            "pong=pong_atari.main:main",
         ],
     },
     project_urls={
-        "Home": "https://github.com/jacob-thompson/pong-atari",
         "Bug Reports": "https://github.com/jacob-thompson/pong-atari/issues",
     },
 )

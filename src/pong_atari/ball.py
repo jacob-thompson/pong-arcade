@@ -1,4 +1,4 @@
-from meta import SCREEN_W, SCREEN_H
+from .meta import SCREEN_W, SCREEN_H
 
 from random import randint
 
