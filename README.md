@@ -29,12 +29,7 @@ This executable program is an implementation of [Pong](https://en.wikipedia.org/
 
 ## Getting Started
 
-Follow the below steps to get the program running.
-
-#### Prerequisites
-
-* Python >= 3.10
-* pygame
+Follow the below steps to get the program running:
 
 #### Download
 
