@@ -67,7 +67,7 @@ class Pong:
         pygame.display.set_icon(icon)
 
     def print_info(self):
-        print("Thanks for playing Pong! https://github.com/jacob-thompson/Pong")
+        print("Thanks for playing Pong! https://github.com/jacob-thompson/pong-atari")
 
     def reset_game(self):
         self.p1.set_paddle_pos()
