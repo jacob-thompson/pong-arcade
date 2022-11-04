@@ -26,12 +26,12 @@ class Pong:
         self.font_small = pygame.font.Font(font_file, 20)
         self.font_tiny = pygame.font.Font(font_file, 10)
 
-        paddle = path.join(self.dir, "data", "sfx", "paddle.wav")
-        self.sound_paddle = pygame.mixer.Sound(paddle)
-        wall = path.join(self.dir, "data", "sfx", "wall.wav")
-        self.sound_wall = pygame.mixer.Sound(wall)
-        score = path.join(self.dir, "data", "sfx", "score.wav")
-        self.sound_score = pygame.mixer.Sound(score)
+        paddle_file = path.join(self.dir, "data", "sfx", "paddle.wav")
+        self.sound_paddle = pygame.mixer.Sound(paddle_file)
+        wall_file = path.join(self.dir, "data", "sfx", "wall.wav")
+        self.sound_wall = pygame.mixer.Sound(wall_file)
+        score_file = path.join(self.dir, "data", "sfx", "score.wav")
+        self.sound_score = pygame.mixer.Sound(score_file)
 
         opt_h = 150
         self.help_rect = pygame.Rect(0, 0, SCREEN_W, opt_h)

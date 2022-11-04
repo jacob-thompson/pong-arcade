@@ -23,16 +23,15 @@ class Player:
             self.color = 255, 0, 0
 
     def set_paddle_pos(self):
-        paddle_size = pw, ph = 10, 50
-        distance_from_edge = ph >> 1
+        distance_from_edge = self.paddle.h >> 1
         default_y = SCREEN_H >> 1
 
         if self.id == 1:
             paddle_pos = distance_from_edge, default_y
-            self.paddle = Rect(paddle_pos, paddle_size)
+            self.paddle = Rect(paddle_pos, self.paddle.size)
         else:
-            paddle_pos = SCREEN_W - distance_from_edge - pw, default_y
-            self.paddle = Rect(paddle_pos, paddle_size)
+            paddle_pos = SCREEN_W - distance_from_edge - self.paddle.w, default_y
+            self.paddle = Rect(paddle_pos, self.paddle.size)
 
     def ensure_in_bound_top(self):
         defect = 20

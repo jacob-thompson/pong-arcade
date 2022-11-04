@@ -79,11 +79,16 @@ In single-player games, Player1 may use either control scheme.
 Distributed under the MIT License. See [LICENSE](https://github.com/jacob-thompson/pong-atari/blob/main/LICENSE) for more information.
 
 
+## Project Links
+
+Github - [jacob-thompson/pong-atari](https://github.com/jacob-thompson/pong-atari)
+
+PyPI - [pong-atari](https://pypi.org/project/pong-atari/)
+
+
 ## Contact
 
 Jacob Alexander Thompson - jacobalthompson@gmail.com
-
-Project Link - [jacob-thompson/pong-atari](https://github.com/jacob-thompson/pong-atari)
 
 
 [contributors-shield]: https://img.shields.io/github/contributors/jacob-thompson/pong-atari.svg?style=flat
