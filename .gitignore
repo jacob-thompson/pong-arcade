@@ -1,10 +1,5 @@
 makefile
-
-# compiled python modules
+__pycache__
 *.pyc
-
-# build output folder
 /dist/
-
-# tox output
 /.tox/
