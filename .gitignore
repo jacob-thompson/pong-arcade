@@ -1,14 +1,10 @@
 makefile
 
-# Compiled python modules
+# compiled python modules
 *.pyc
 
-# Setuptools distribution folder
+# build output folder
 /dist/
 
-# Python egg metadata, regenerated from source files by setuptools
-src/*.egg-info/
-/*.egg/
-
-# Tox output
+# tox output
 /.tox/
