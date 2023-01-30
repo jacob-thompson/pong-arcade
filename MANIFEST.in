@@ -1,3 +1,0 @@
-include src/pong_atari/data/gfx/logo.png
-include src/pong_atari/data/gfx/atari.otf
-include src/pong_atari/data/sfx/*.wav
