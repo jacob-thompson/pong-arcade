@@ -29,8 +29,6 @@ This executable program is an implementation of [Pong](https://en.wikipedia.org/
 
 ## Getting Started
 
-Follow the below steps to get the program running:
-
 #### Download
 
 ```sh
@@ -45,11 +43,9 @@ pong
 
 ## Controls
 
-The game may be quit by pressing `Esc` at any time.
-Controls can be brought up in-game by pressing `C` on the menu screen.
-
 #### Menu
 
+* `Esc` Quit
 * `C` Show controls
 * `1` Select first menu option (One player)
 * `2` Select second menu option (Two players)
@@ -63,15 +59,15 @@ Controls can be brought up in-game by pressing `C` on the menu screen.
 
 * `W` Move Player1 up
 * `S` Move Player1 down
-* `I` Move Player2 (or Player1 in single-player) up
-* `K` Move Player2 (or Player1 in single-player) down
+* `I` Move Player2 up
+* `K` Move Player2 down
 
 In single-player games, Player1 may use either control scheme.
 
 ###### Pause/Quit
 
-* `P` or `Q` Pause the game
-* `M` or `Z` Exit to menu
+* `P` / `Q` Pause the game
+* `M` / `Z` Exit to menu
 
 
 ## License
