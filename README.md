@@ -46,10 +46,10 @@ pong
 #### Menu
 
 * `Esc` Quit
-* `C` Show controls
-* `1` Select first menu option (One player)
-* `2` Select second menu option (Two players)
-* `3` Toggle third menu option (Sound)
+* `C` Controls
+* `1` Select first menu option
+* `2` Select second menu option
+* `3` Toggle third menu option
 
 #### In-Game
 
@@ -57,12 +57,10 @@ pong
 
 ###### Movement
 
-* `W` Move Player1 up
-* `S` Move Player1 down
-* `I` Move Player2 up
-* `K` Move Player2 down
+* `W` / `I` Move up
+* `S` / `K` Move down
 
-In single-player games, Player1 may use either control scheme.
+Player1 may use either control scheme in single-player games.
 
 ###### Pause/Quit
 
