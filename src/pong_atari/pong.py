@@ -16,8 +16,6 @@ class Pong:
 
         self.clock = pygame.time.Clock()
 
-        self.mouse_pos = pygame.mouse.get_pos()
-
         self.dir, self.file = path.split(__file__)
 
         font_file = path.join(self.dir, "data", "gfx", "atari.otf")
