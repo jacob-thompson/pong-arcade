@@ -9,8 +9,7 @@ import pygame
 
 class Pong:
     def __init__(self):
-        pygame.init()
-
+        pygame.display.init()
         size = SCREEN_W, SCREEN_H
         self.surface = pygame.display.set_mode(size)
 
@@ -18,12 +17,14 @@ class Pong:
 
         self.dir, self.file = path.split(__file__)
 
+        pygame.font.init()
         font_file = path.join(self.dir, "data", "gfx", "atari.otf")
         self.font = pygame.font.Font(font_file, 50)
         self.font_big = pygame.font.Font(font_file, 100)
         self.font_small = pygame.font.Font(font_file, 20)
         self.font_tiny = pygame.font.Font(font_file, 10)
 
+        pygame.mixer.init()
         paddle_file = path.join(self.dir, "data", "sfx", "paddle.wav")
         self.sound_paddle = pygame.mixer.Sound(paddle_file)
         wall_file = path.join(self.dir, "data", "sfx", "wall.wav")
