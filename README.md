@@ -7,11 +7,11 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/jacob-thompson/pong-atari">
-    <img src="https://raw.githubusercontent.com/jacob-thompson/pong-atari/main/src/pong_atari/data/gfx/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/jacob-thompson/pong-arcade">
+    <img src="https://raw.githubusercontent.com/jacob-thompson/pong-arcade/main/src/pong_arcade/data/gfx/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">pong-atari</h3>
+  <h3 align="center">pong-arcade</h3>
 
   <p align="center">
     Pong written using pygame
@@ -22,9 +22,9 @@
 
 ## About The Project
 
-![Pong Screenshot](https://raw.githubusercontent.com/jacob-thompson/pong-atari/main/src/pong_atari/data/gfx/screenshot.png)
+![Pong Screenshot](https://raw.githubusercontent.com/jacob-thompson/pong-arcade/main/src/pong_arcade/data/gfx/screenshot.png)
 
-This executable program is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This implementation was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/pong-atari/tree/main/src/pong_atari/data).
+This executable program is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/pong-arcade/tree/main/src/pong_arcade/data).
 
 
 ## Getting Started
@@ -32,7 +32,7 @@ This executable program is an implementation of [Pong](https://en.wikipedia.org/
 #### Download
 
 ```sh
-pip install pong-atari
+pip install pong-arcade
 ```
 
 #### Run
@@ -53,7 +53,7 @@ pong
 
 #### In-Game
 
-![Controls Screenshot](https://raw.githubusercontent.com/jacob-thompson/pong-atari/main/src/pong_atari/data/gfx/controls.png)
+![Controls Screenshot](https://raw.githubusercontent.com/jacob-thompson/pong-arcade/main/src/pong_arcade/data/gfx/controls.png)
 
 ###### Movement
 
@@ -70,14 +70,14 @@ Player1 may use either control scheme in single-player games.
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](https://github.com/jacob-thompson/pong-atari/blob/main/LICENSE) for more information.
+Distributed under the MIT License. See [LICENSE](https://github.com/jacob-thompson/pong-arcade/blob/main/LICENSE) for more information.
 
 
 ## Project Links
 
-Github - [jacob-thompson/pong-atari](https://github.com/jacob-thompson/pong-atari)
+Github - [jacob-thompson/pong-arcade](https://github.com/jacob-thompson/pong-arcade)
 
-PyPI - [pong-atari](https://pypi.org/project/pong-atari/)
+PyPI - [pong-arcade](https://pypi.org/project/pong-arcade/)
 
 
 ## Contact
@@ -85,13 +85,13 @@ PyPI - [pong-atari](https://pypi.org/project/pong-atari/)
 Jacob Alexander Thompson - jacobalthompson@gmail.com
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/jacob-thompson/pong-atari.svg?style=flat
-[contributors-url]: https://github.com/jacob-thompson/pong-atari/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/jacob-thompson/pong-atari.svg?style=flat
-[forks-url]: https://github.com/jacob-thompson/pong-atari/network/members
-[stars-shield]: https://img.shields.io/github/stars/jacob-thompson/pong-atari.svg?style=flat
-[stars-url]: https://github.com/jacob-thompson/pong-atari/stargazers
+[contributors-shield]: https://img.shields.io/github/contributors/jacob-thompson/pong-arcade.svg?style=flat
+[contributors-url]: https://github.com/jacob-thompson/pong-arcade/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jacob-thompson/pong-arcade.svg?style=flat
+[forks-url]: https://github.com/jacob-thompson/pong-arcade/network/members
+[stars-shield]: https://img.shields.io/github/stars/jacob-thompson/pong-arcade.svg?style=flat
+[stars-url]: https://github.com/jacob-thompson/pong-arcade/stargazers
 [issues-shield]: https://img.shields.io/github/issues/jacob-thompson/Pong.svg?style=flat
-[issues-url]: https://github.com/jacob-thompson/pong-atari/issues
+[issues-url]: https://github.com/jacob-thompson/pong-arcade/issues
 [license-shield]: https://img.shields.io/github/license/jacob-thompson/Pong.svg?style=flat
-[license-url]: https://github.com/jacob-thompson/pong-atari/blob/main/LICENSE
+[license-url]: https://github.com/jacob-thompson/pong-arcade/blob/main/LICENSE

@@ -1,11 +1,11 @@
 [project]
-name = "pong-atari"
+name = "pong-arcade"
 version = "2.1.2"
 description = "Pong written using pygame"
 readme = "README.md"
 requires-python = ">=3.7"
 license = {file = "LICENSE"}
-keywords = ["pong", "atari", "game", "executable", "application"]
+keywords = ["pong", "arcade", "game", "executable", "application"]
 authors = [
     {name = "Jacob A. Thompson", email = "jacobalthompson@gmail.com"}
 ]
@@ -26,16 +26,16 @@ classifiers = [
 dependencies = ["pygame"]
 
 [project.urls]
-"Homepage" = "https://github.com/jacob-thompson/pong-atari"
-"Bug Reports" = "https://github.com/jacob-thompson/pong-atari/issues"
+"Homepage" = "https://github.com/jacob-thompson/pong-arcade"
+"Bug Reports" = "https://github.com/jacob-thompson/pong-arcade/issues"
 
 [project.scripts]
-pong = "pong_atari.main:main"
+pong = "pong_arcade.main:main"
 
 [tool.hatch.build]
 exclude = [
-    "src/pong_atari/data/gfx/controls.png",
-    "src/pong_atari/data/gfx/screenshot.png"
+    "src/pong_arcade/data/gfx/controls.png",
+    "src/pong_arcade/data/gfx/screenshot.png"
 ]
 
 [build-system]
