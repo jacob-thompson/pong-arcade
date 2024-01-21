@@ -32,7 +32,7 @@ This executable program is an implementation of [Pong](https://en.wikipedia.org/
 #### Download
 
 ```sh
-pip install pong-arcade
+pipx install pong-arcade
 ```
 
 #### Run
