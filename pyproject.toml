@@ -1,6 +1,6 @@
 [project]
 name = "pong-arcade"
-version = "2.2.0"
+version = "{{VERSION_PLACEHOLDER}}"
 description = "Pong written using pygame"
 readme = "README.md"
 requires-python = ">=3.7"
