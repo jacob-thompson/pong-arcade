@@ -1,4 +1,4 @@
-.PHONY: clean build install run test pushtest push
+.PHONY: clean build install run test
 DEFAULT: run
 
 clean:
@@ -12,7 +12,3 @@ run: install
 test: build
 	twine check dist/*
 	tox
-pushtest: build
-	twine upload --repository testpypi dist/*
-push: build
-	twine upload dist/*
