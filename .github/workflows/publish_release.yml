@@ -27,6 +27,8 @@ jobs:
       id: tag
       run: echo "TAG_NAME={$(echo $GITHUB_REF | cut -d / -f 3)}" >> $GITHUB_OUTPUT
     - name: Update version in pyproject.toml
+      env:
+        TAG_NAME: ${{ steps.tag.outputs.TAG_NAME }}
       run: >-
         sed -i 's/{{VERSION_PLACEHOLDER}}/$TAG_NAME/g' pyproject.toml
     - name: Build a binary wheel
