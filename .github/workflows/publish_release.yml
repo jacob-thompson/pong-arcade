@@ -30,7 +30,7 @@ jobs:
       env:
         TAG_NAME: ${{ steps.tag.outputs.TAG_NAME }}
       run: >-
-        sed -i 's/{{VERSION_PLACEHOLDER}}/$TAG_NAME/g' pyproject.toml
+        sed -i "s/{{VERSION_PLACEHOLDER}}/$TAG_NAME/g" pyproject.toml
     - name: Build a binary wheel
       run: >-
         python3 -m build
