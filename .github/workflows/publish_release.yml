@@ -15,7 +15,8 @@ jobs:
     permissions:
       id-token: write
     steps:
-    - uses: actions/checkout@master
+    - name: Checkout source
+      uses: actions/checkout@main
     - name: Install Python 3.11
       uses: actions/setup-python@v3
       with:
@@ -36,5 +37,3 @@ jobs:
         python3 -m build
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
-      #with:
-        #password: ${{ secrets.PYPI_API_TOKEN }}
