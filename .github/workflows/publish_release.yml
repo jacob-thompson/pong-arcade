@@ -1,4 +1,4 @@
-name: Publish Python 🐍 distributions 📦 to PyPI
+name: Upload release to PyPI
 
 on:
   push:
@@ -6,9 +6,14 @@ on:
      - '*'
 
 jobs:
-  build-n-publish:
-    name: Build and publish Python 🐍 distributions 📦 to PyPI
+  pypi-publish:
+    name: Upload release to PyPI
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/pong-arcade/
+    permissions:
+      id-token: write
     steps:
     - uses: actions/checkout@master
     - name: Set up Python 3.11
@@ -28,6 +33,4 @@ jobs:
       run: >-
         python3 -m build
     - name: Publish distribution 📦 to PyPI
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        password: ${{ secrets.PYPI_API_TOKEN }}
+      uses: pypa/gh-action-pypi-publish@release/v1
