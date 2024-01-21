@@ -16,23 +16,25 @@ jobs:
       id-token: write
     steps:
     - uses: actions/checkout@master
-    - name: Set up Python 3.11
+    - name: Install Python 3.11
       uses: actions/setup-python@v3
       with:
         python-version: '3.11'
-    - name: Install build
+    - name: Install build tool
       run: >-
         pip install build
-    - name: Extract tag name
+    - name: Extract version tag
       id: tag
       run: echo "TAG_NAME=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
-    - name: Update version in pyproject.toml
+    - name: Update version tag
       env:
         TAG_NAME: ${{ steps.tag.outputs.TAG_NAME }}
       run: >-
         sed -i "s/{{VERSION_PLACEHOLDER}}/$TAG_NAME/g" pyproject.toml
-    - name: Build a binary wheel
+    - name: Build package
       run: >-
         python3 -m build
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.PYPI_API_TOKEN }}
