@@ -27,10 +27,15 @@
 This executable program is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/pong-arcade/tree/main/src/pong_arcade/data).
 
 
-## Getting Started
+## Play
 
-#### Download
+#### Install
 
+```sh
+pip install pong-arcade
+```
+
+Due to [PEP 668](https://peps.python.org/pep-0668/) compliance, `pip`, on some systems, may throw an `externally-managed-environment` error upon running `pip install`. In this case, the following is recommended:
 ```sh
 pipx install pong-arcade
 ```
