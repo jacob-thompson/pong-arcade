@@ -35,7 +35,7 @@ This executable program is an implementation of [Pong](https://en.wikipedia.org/
 pip install pong-arcade
 ```
 
-Due to [PEP 668](https://peps.python.org/pep-0668/) compliance, `pip`, on some systems, may throw an `externally-managed-environment` error upon running `pip install`. In this case, the following is recommended:
+Due to [PEP 668](https://peps.python.org/pep-0668/) compliance, `pip`, on some systems, may throw the `externally-managed-environment` error upon running `install`. In which case, the following is recommended:
 ```sh
 pipx install pong-arcade
 ```
