@@ -24,12 +24,6 @@ jobs:
     - name: Install build tool
       run: >-
         pip install build
-    - name: Extract version tag
-      id: tag
-      run: echo "TAG_NAME=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
-    - name: Update version tag
-      env:
-        TAG_NAME: ${{ steps.tag.outputs.TAG_NAME }}
     - name: Build package
       run: >-
         python3 -m build
