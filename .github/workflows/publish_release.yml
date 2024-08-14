@@ -30,8 +30,6 @@ jobs:
     - name: Update version tag
       env:
         TAG_NAME: ${{ steps.tag.outputs.TAG_NAME }}
-      run: >-
-        sed -i "s/{{VERSION_PLACEHOLDER}}/$TAG_NAME/g" pyproject.toml
     - name: Build package
       run: >-
         python3 -m build
