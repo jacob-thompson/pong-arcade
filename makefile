@@ -4,7 +4,7 @@ DEFAULT: run
 clean:
 	rm -rf dist .tox
 build: clean
-	python3 -m build
+	python -m build
 install: build
 	pipx install dist/*.tar.gz --force
 run: install
