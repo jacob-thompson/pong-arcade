@@ -24,26 +24,56 @@
 
 ![Pong Screenshot](https://raw.githubusercontent.com/jacob-thompson/pong-arcade/main/src/pong_arcade/data/gfx/screenshot.png)
 
-This executable program is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/pong-arcade/tree/main/src/pong_arcade/data).
+This application is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/pong-arcade/tree/main/src/pong_arcade/data).
 
 
 ## Play
 
 #### Install
 
-```sh
-pip install pong-arcade
-```
+Due to [PEP 668](https://peps.python.org/pep-0668/) compliance, it is recommended to use `pipx` to install this application, which may need to be [installed separately](https://github.com/pypa/pipx#install-pipx). `pipx` installs applications and their dependencies into their own virtual environment.
 
-Due to [PEP 668](https://peps.python.org/pep-0668/) compliance, `pip`, on some systems, may throw the `externally-managed-environment` error upon running `install`. In which case, the following is recommended:
 ```sh
 pipx install pong-arcade
 ```
 
-#### Run
+Running `pip` as usual may work on your system.
 
 ```sh
-pong
+pip install pong-arcade
+```
+
+###### From Source
+
+This application may also be built and installed from source. You may need to install the pip package `build` in order to do this.
+
+```sh
+git clone https://github.com/jacob-thompson/pong-arcade.git
+cd pong-arcade
+python -m build # builds the package
+pipx install dist/*.tar.gz # installs the application
+```
+
+You could use `make` commands to simplify these commands. This requires GNU Make to be installed on your device (`build-essential` package, or [see here](https://www.gnu.org/software/make/#download)).
+
+```sh
+git clone https://github.com/jacob-thompson/pong-arcade.git
+cd pong-arcade
+make install # builds and installs the application
+```
+
+#### Run
+
+The application should be on your PATH. Run `pong` to execute the application.
+
+###### From Source
+
+```sh
+make # builds, installs, and executes the application
+```
+
+```sh
+pong # executes the application
 ```
 
 ## Controls
