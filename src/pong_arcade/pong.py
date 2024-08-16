@@ -66,7 +66,7 @@ class Pong:
         pygame.display.set_icon(icon)
 
     def print_info(self):
-        print("Thanks for playing Pong! https://github.com/jacob-thompson/pong-arcade")
+        print("Thank you for playing Pong! https://github.com/jacob-thompson/pong-arcade")
 
     def reset_game(self):
         self.p1.set_paddle_pos()
@@ -348,7 +348,7 @@ class Pong:
         self.surface.blit(ctext, ctrect)
 
     def draw_info(self):
-        disclaimer = "MIT License Copyright (c) 2022 Jacob Alexander Thompson"
+        disclaimer = "Distributed under the MIT License"
 
         dtext = self.font_tiny.render(disclaimer, 1, self.fg_color)
         dtpos = 3, SCREEN_H
