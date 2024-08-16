@@ -348,7 +348,7 @@ class Pong:
         self.surface.blit(ctext, ctrect)
 
     def draw_info(self):
-        disclaimer = "Distributed under the MIT License"
+        disclaimer = "MIT License Copyright (c) 2024 Jacob Alexander Thompson"
 
         dtext = self.font_tiny.render(disclaimer, 1, self.fg_color)
         dtpos = 3, SCREEN_H
