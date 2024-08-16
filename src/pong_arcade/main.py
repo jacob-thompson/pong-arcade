@@ -1,6 +1,6 @@
 from .pong import Pong
 
-from pygame import event
+from pygame import event, quit
 
 def main():
     pong = Pong()
@@ -8,7 +8,7 @@ def main():
     pong.set_window_properties()
     pong.print_info()
 
-    while 1:
+    while pong.running:
         pong.tick()
 
         for e in event.get():
@@ -24,3 +24,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    quit()

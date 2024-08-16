@@ -3,7 +3,6 @@ from .player import Player
 from .ball import Ball
 
 from os import path
-from sys import exit
 
 import pygame
 
@@ -47,6 +46,8 @@ class Pong:
         self.paused = False
 
         self.show_win_screen = False
+
+        self.running = True
 
         self.bg_color = 255, 255, 255
         self.fg_color = 0, 0, 0
@@ -99,17 +100,18 @@ class Pong:
             self.go_to_menu()
             return
 
-        if not self.show_menu: return
+        if not self.show_menu:
+            return
 
         if self.show_help_menu:
             self.show_help_menu = not self.show_help_menu
         elif button == pygame.K_c:
             self.show_help_menu = not self.show_help_menu
-        elif button == pygame.K_1 and not self.show_help_menu:
+        elif button == pygame.K_1:
             self.opt1_selected = True
-        elif button == pygame.K_2 and not self.show_help_menu:
+        elif button == pygame.K_2:
             self.opt2_selected = True
-        elif button == pygame.K_3 and not self.show_help_menu:
+        elif button == pygame.K_3:
             self.opt3_selected = not self.opt3_selected
 
             if self.opt3_selected: self.sound_paddle.play()
@@ -123,8 +125,10 @@ class Pong:
             self.go_to_menu()
             return
 
-        if not self.show_menu: return
-        if button != 1: return
+        if not self.show_menu:
+            return
+        if button != 1:
+            return
 
         if self.show_help_menu:
             self.show_help_menu = not self.show_help_menu
@@ -153,7 +157,8 @@ class Pong:
             self.paused = not self.paused
 
     def handle_event(self, event):
-        if event.type == pygame.QUIT: exit()
+        if event.type == pygame.QUIT:
+            self.running = False
 
         if event.type == pygame.KEYDOWN:
             self.menu_keyboard_select(event.key)
@@ -162,7 +167,7 @@ class Pong:
             pause = event.key == pygame.K_p or event.key == pygame.K_q
             menu = event.key == pygame.K_m or event.key == pygame.K_z
 
-            if close: exit()
+            if close: self.running = False
             elif pause: self.toggle_pause()
             elif menu: self.go_to_menu()
 
