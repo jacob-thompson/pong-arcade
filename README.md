@@ -22,16 +22,16 @@
 
 ## About The Project
 
-![Pong Screenshot](https://raw.githubusercontent.com/jacob-thompson/pong-arcade/main/src/pong_arcade/data/gfx/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/jacob-thompson/pong-arcade/main/src/pong_arcade/data/gfx/screenshot.png)
 
-This application is an implementation of [Pong](https://en.wikipedia.org/wiki/Pong), originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. This was created using [Pygame](https://www.pygame.org/wiki/about) and hand-made [resources](https://github.com/jacob-thompson/pong-arcade/tree/main/src/pong_arcade/data).
+This application is a pythonic implementation of [Pong](https://en.wikipedia.org/wiki/Pong), a game originally developed and released by [Atari](https://en.wikipedia.org/wiki/Atari,_Inc._(1972%E2%80%931992)) in 1972. `pong-arcade` was created using [pygame](https://www.pygame.org/wiki/about) and [various resources](https://github.com/jacob-thompson/pong-arcade/tree/main/src/pong_arcade/data).
 
 
 ## Play
 
 #### Install
 
-Due to [PEP 668](https://peps.python.org/pep-0668/) compliance, it is recommended to use `pipx` to install this application, which may need to be [installed separately](https://github.com/pypa/pipx#install-pipx). `pipx` installs applications and their dependencies into their own virtual environment.
+As per [PEP 668](https://peps.python.org/pep-0668/), it is recommended to use `pipx` to install this application, which may need to be [installed separately](https://github.com/pypa/pipx#install-pipx). `pipx` installs applications and their dependencies into their own virtual environment.
 
 ```sh
 pipx install pong-arcade
@@ -45,26 +45,22 @@ pip install pong-arcade
 
 ###### From Source
 
-This application may also be built and installed from source. You may need to install the pip package `build` in order to do this.
+This application may also be built and installed from source. You may need to install the pip package `build` in order to do this. Clone the repository, and then run the following commands in the project's directory.
 
 ```sh
-git clone https://github.com/jacob-thompson/pong-arcade.git
-cd pong-arcade
 python -m build # builds the package
 pipx install dist/*.tar.gz # installs the application
 ```
 
-You could use `make` commands to simplify these commands. This requires GNU Make to be installed on your device (`build-essential` package, or [see here](https://www.gnu.org/software/make/#download)).
+You could use `make` to simplify these commands. This requires [GNU Make](https://www.gnu.org/software/make/#download) to be installed on your system.
 
 ```sh
-git clone https://github.com/jacob-thompson/pong-arcade.git
-cd pong-arcade
 make install # builds and installs the application
 ```
 
 #### Run
 
-The application should be on your PATH. Run `pong` to execute the application.
+The application should now be on your PATH. Run `pong` to execute the application.
 
 ###### From Source
 
@@ -77,6 +73,8 @@ pong # executes the application
 ```
 
 ## Controls
+
+The controls may be examined in-game from the menu.
 
 #### Menu
 
