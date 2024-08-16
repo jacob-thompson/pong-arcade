@@ -17,15 +17,15 @@ jobs:
     steps:
     - name: Checkout source
       uses: actions/checkout@main
-    - name: Install Python 3.11
+    - name: Install Python 3.12
       uses: actions/setup-python@v3
       with:
-        python-version: '3.11'
+        python-version: '3.12'
     - name: Install build tool
       run: >-
         pip install build
     - name: Build package
       run: >-
-        python3 -m build
+        python -m build
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
