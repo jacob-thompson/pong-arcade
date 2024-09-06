@@ -35,7 +35,7 @@ dependencies = ["pygame"]
 "Homepage" = "https://github.com/jacob-thompson/pong-arcade"
 "Bug Reports" = "https://github.com/jacob-thompson/pong-arcade/issues"
 
-[project.scripts]
+[project.gui-scripts]
 pong = "pong_arcade.main:main"
 
 [tool.hatch.build]
