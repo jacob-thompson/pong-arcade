@@ -33,13 +33,13 @@ This application is an implementation of [Pong](https://en.wikipedia.org/wiki/Po
 
 As per [PEP 668](https://peps.python.org/pep-0668/), it is recommended to use `pipx` to install this application:
 
-```sh
+```bash
 pipx install pong-arcade
 ```
 
 Otherwise:
 
-```sh
+```bash
 pip install pong-arcade
 ```
 
@@ -47,19 +47,19 @@ pip install pong-arcade
 
 This application may also be built and installed from source. Requires the pip package `build`:
 
-```sh
-python -m build
+```bash
+python3 -m build
 pipx install dist/*.tar.gz
 ```
 
-```sh
-python -m build
+```bash
+python3 -m build
 pip install dist/*.tar.gz
 ```
 
 #### Run
 
-```sh
+```bash
 pong
 ```
 
