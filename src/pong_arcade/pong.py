@@ -6,6 +6,7 @@ from os import path
 
 import pygame
 
+
 class Pong:
     def __init__(self):
         pygame.display.init()
@@ -114,7 +115,8 @@ class Pong:
         elif button == pygame.K_3:
             self.opt3_selected = not self.opt3_selected
 
-            if self.opt3_selected: self.sound_paddle.play()
+            if self.opt3_selected:
+                self.sound_paddle.play()
 
         if self.opt1_selected or self.opt2_selected:
             self.start_new_game()
@@ -141,7 +143,8 @@ class Pong:
         elif self.opt3_rect.collidepoint(pos) and not self.show_help_menu:
             self.opt3_selected = not self.opt3_selected
 
-            if self.opt3_selected: self.sound_paddle.play()
+            if self.opt3_selected:
+                self.sound_paddle.play()
 
         if self.opt1_selected or self.opt2_selected:
             self.start_new_game()
@@ -167,9 +170,12 @@ class Pong:
             pause = event.key == pygame.K_p or event.key == pygame.K_q
             menu = event.key == pygame.K_m or event.key == pygame.K_z
 
-            if close: self.running = False
-            elif pause: self.toggle_pause()
-            elif menu: self.go_to_menu()
+            if close:
+                self.running = False
+            elif pause:
+                self.toggle_pause()
+            elif menu:
+                self.go_to_menu()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             self.menu_mouse_select(event.pos, event.button)
@@ -294,12 +300,12 @@ class Pong:
     def draw_scores(self):
         score1 = self.font.render(str(self.p1.score), 1, self.p1.color)
         s1_pos = SCREEN_W >> 2, 0
-        s1_rect = score1.get_rect(midtop = s1_pos)
+        s1_rect = score1.get_rect(midtop=s1_pos)
         self.surface.blit(score1, s1_rect)
 
         score2 = self.font.render(str(self.p2.score), 1, self.p2.color)
         s2_pos = (SCREEN_W >> 1) + (SCREEN_W >> 2), 0
-        s2_rect = score2.get_rect(midtop = s2_pos)
+        s2_rect = score2.get_rect(midtop=s2_pos)
         self.surface.blit(score2, s2_rect)
 
     def draw_paddles(self, help_menu=False):
@@ -320,17 +326,17 @@ class Pong:
     def draw_title(self):
         text = self.font_big.render(TITLE, 1, self.fg_color)
         tpos = self.help_rect.center
-        trect = text.get_rect(center = tpos)
+        trect = text.get_rect(center=tpos)
         self.surface.blit(text, trect)
 
     def draw_options(self):
         option1 = "(1) One Player"
         option1_text = self.font.render(option1, 1, self.blue)
-        option1_rect = option1_text.get_rect(center = self.opt1_rect.center)
+        option1_rect = option1_text.get_rect(center=self.opt1_rect.center)
 
         option2 = "(2) Two Players"
         option2_text = self.font.render(option2, 1, self.red)
-        option2_rect = option2_text.get_rect(center = self.opt2_rect.center)
+        option2_rect = option2_text.get_rect(center=self.opt2_rect.center)
 
         if self.opt3_selected:
             option3 = "(3) Sound: On"
@@ -338,7 +344,7 @@ class Pong:
             option3 = "(3) Sound: Off"
 
         option3_text = self.font.render(option3, 1, self.fg_color)
-        option3_rect = option3_text.get_rect(center = self.opt3_rect.center)
+        option3_rect = option3_text.get_rect(center=self.opt3_rect.center)
 
         self.surface.blit(option1_text, option1_rect)
         self.surface.blit(option2_text, option2_rect)
@@ -348,7 +354,7 @@ class Pong:
 
         ctext = self.font_tiny.render(controls, 1, self.fg_color)
         ctpos = SCREEN_W - 3, 0
-        ctrect = ctext.get_rect(topright = ctpos)
+        ctrect = ctext.get_rect(topright=ctpos)
 
         self.surface.blit(ctext, ctrect)
 
@@ -357,7 +363,7 @@ class Pong:
 
         dtext = self.font_tiny.render(disclaimer, 1, self.fg_color)
         dtpos = 3, SCREEN_H
-        dtrect = dtext.get_rect(bottomleft = dtpos)
+        dtrect = dtext.get_rect(bottomleft=dtpos)
         self.surface.blit(dtext, dtrect)
 
     def draw_menu(self):
@@ -384,10 +390,10 @@ class Pong:
             pygame.Vector2(-head_w >> 1, -head_h >> 1),
         ]
 
-        translation = pygame.Vector2(0, arrow.length() - (head_h >> 1)).rotate(-angle)
+        diff = pygame.Vector2(0, arrow.length() - (head_h >> 1)).rotate(-angle)
         for i in range(len(head_verts)):
             head_verts[i].rotate_ip(-angle)
-            head_verts[i] += translation
+            head_verts[i] += diff
             head_verts[i] += start
 
         pygame.draw.polygon(surface, color, head_verts)
@@ -400,10 +406,10 @@ class Pong:
                 pygame.Vector2(-body_w >> 1, -body_len >> 1),
             ]
 
-            translation = pygame.Vector2(0, body_len >> 1).rotate(-angle)
+            diff = pygame.Vector2(0, body_len >> 1).rotate(-angle)
             for i in range(len(body_verts)):
                 body_verts[i].rotate_ip(-angle)
-                body_verts[i] += translation
+                body_verts[i] += diff
                 body_verts[i] += start
 
             pygame.draw.polygon(surface, color, body_verts)
@@ -412,38 +418,85 @@ class Pong:
         gap = 30
         arrow_len = 100
 
-        p1_up_spos = self.p1.paddle.centerx, self.p1.paddle.top - gap
-        p1_up_epos = self.p1.paddle.centerx, self.p1.paddle.top - gap - arrow_len
-        p1_down_spos = self.p1.paddle.centerx, self.p1.paddle.bottom + gap
-        p1_down_epos = self.p1.paddle.centerx, self.p1.paddle.bottom + gap + arrow_len
+        p1_up_spos = tuple(
+            self.p1.paddle.centerx,
+            self.p1.paddle.top - gap
+        )
+        p1_up_epos = tuple(
+            self.p1.paddle.centerx,
+            self.p1.paddle.top - gap - arrow_len
+        )
+        p1_down_spos = tuple(
+            self.p1.paddle.centerx,
+            self.p1.paddle.bottom + gap
+        )
+        p1_down_epos = tuple(
+            self.p1.paddle.centerx,
+            self.p1.paddle.bottom + gap + arrow_len
+        )
 
-        p2_up_spos = self.p2.paddle.centerx, self.p2.paddle.top - gap
-        p2_up_epos = self.p2.paddle.centerx, self.p2.paddle.top - gap - arrow_len
-        p2_down_spos = self.p2.paddle.centerx, self.p2.paddle.bottom + gap
-        p2_down_epos = self.p2.paddle.centerx, self.p2.paddle.bottom + gap + arrow_len
+        p2_up_spos = tuple(
+            self.p2.paddle.centerx,
+            self.p2.paddle.top - gap
+        )
+        p2_up_epos = tuple(
+            self.p2.paddle.centerx,
+            self.p2.paddle.top - gap - arrow_len
+        )
+        p2_down_spos = tuple(
+            self.p2.paddle.centerx,
+            self.p2.paddle.bottom + gap
+        )
+        p2_down_epos = tuple(
+            self.p2.paddle.centerx,
+            self.p2.paddle.bottom + gap + arrow_len
+        )
 
-        self.draw_arrow(self.surface, p1_up_spos, p1_up_epos, self.fg_color)
-        self.draw_arrow(self.surface, p1_down_spos, p1_down_epos, self.fg_color)
-        self.draw_arrow(self.surface, p2_up_spos, p2_up_epos, self.fg_color)
-        self.draw_arrow(self.surface, p2_down_spos, p2_down_epos, self.fg_color)
+        self.draw_arrow(
+            self.surface,
+            p1_up_spos,
+            p1_up_epos,
+            self.fg_color
+        )
+
+        self.draw_arrow(
+            self.surface,
+            p1_down_spos,
+            p1_down_epos,
+            self.fg_color
+        )
+
+        self.draw_arrow(
+            self.surface,
+            p2_up_spos,
+            p2_up_epos,
+            self.fg_color
+        )
+
+        self.draw_arrow(
+            self.surface,
+            p2_down_spos,
+            p2_down_epos,
+            self.fg_color
+        )
 
     def draw_help_text(self):
         hmenu = "Pong Controls"
         hmenu_text = self.font_small.render(hmenu, 1, self.fg_color)
         hmenu_pos = SCREEN_W >> 1, 0
-        hmenu_rect = hmenu_text.get_rect(midtop = hmenu_pos)
+        hmenu_rect = hmenu_text.get_rect(midtop=hmenu_pos)
         self.surface.blit(hmenu_text, hmenu_rect)
 
         pause = "P or Q  -  Pause"
         pause_text = self.font_small.render(pause, 1, self.fg_color)
         pause_pos = self.p1.paddle.centerx, SCREEN_H >> 3
-        pause_rect = pause_text.get_rect(center = pause_pos)
+        pause_rect = pause_text.get_rect(center=pause_pos)
         self.surface.blit(pause_text, pause_rect)
 
         menu = "Menu  -  M or Z"
         menu_text = self.font_small.render(menu, 1, self.fg_color)
         menu_pos = self.p2.paddle.centerx, SCREEN_H >> 3
-        menu_rect = menu_text.get_rect(center = menu_pos)
+        menu_rect = menu_text.get_rect(center=menu_pos)
         self.surface.blit(menu_text, menu_rect)
 
         cmdleft = (SCREEN_W >> 3) * 3
@@ -454,49 +507,49 @@ class Pong:
         wkey = "W"
         wkey_text = self.font_small.render(wkey, 1, self.fg_color)
         wkey_pos = cmdleft, cmdup
-        wkey_rect = wkey_text.get_rect(center = wkey_pos)
+        wkey_rect = wkey_text.get_rect(center=wkey_pos)
         self.surface.blit(wkey_text, wkey_rect)
 
         skey = "S"
         skey_text = self.font_small.render(skey, 1, self.fg_color)
         skey_pos = cmdleft, cmddown
-        skey_rect = skey_text.get_rect(center = skey_pos)
+        skey_rect = skey_text.get_rect(center=skey_pos)
         self.surface.blit(skey_text, skey_rect)
 
         ikey = "I"
         ikey_text = self.font_small.render(ikey, 1, self.fg_color)
         ikey_pos = cmdright, cmdup
-        ikey_rect = ikey_text.get_rect(center = ikey_pos)
+        ikey_rect = ikey_text.get_rect(center=ikey_pos)
         self.surface.blit(ikey_text, ikey_rect)
 
         kkey = "K"
         kkey_text = self.font_small.render(kkey, 1, self.fg_color)
         kkey_pos = cmdright, cmddown
-        kkey_rect = kkey_text.get_rect(center = kkey_pos)
+        kkey_rect = kkey_text.get_rect(center=kkey_pos)
         self.surface.blit(kkey_text, kkey_rect)
 
         p1 = "Player 1"
         p1_text = self.font_small.render(p1, 1, self.blue)
         p1_pos = SCREEN_W >> 3, self.p1.paddle.centery
-        p1_rect = p1_text.get_rect(center = p1_pos)
+        p1_rect = p1_text.get_rect(center=p1_pos)
         self.surface.blit(p1_text, p1_rect)
 
         p2 = "Player 2"
         p2_text = self.font_small.render(p2, 1, self.red)
         p2_pos = SCREEN_W - (SCREEN_W >> 3), self.p2.paddle.centery
-        p2_rect = p2_text.get_rect(center = p2_pos)
+        p2_rect = p2_text.get_rect(center=p2_pos)
         self.surface.blit(p2_text, p2_rect)
 
         info = "Player1 may use either keys in single-player games."
         info_text = self.font_small.render(info, 1, self.fg_color)
         info_pos = SCREEN_W >> 1, SCREEN_H - (SCREEN_H >> 3)
-        info_rect = info_text.get_rect(center = info_pos)
+        info_rect = info_text.get_rect(center=info_pos)
         self.surface.blit(info_text, info_rect)
 
         cont = "Press any button to continue"
         cont_text = self.font_small.render(cont, 1, self.fg_color)
         cont_pos = SCREEN_W >> 1, SCREEN_H
-        cont_rect = cont_text.get_rect(midbottom = cont_pos)
+        cont_rect = cont_text.get_rect(midbottom=cont_pos)
         self.surface.blit(cont_text, cont_rect)
 
     def draw_help_menu(self):
@@ -511,7 +564,7 @@ class Pong:
         paused = "Paused"
         paused_text = self.font.render(paused, 1, self.fg_color)
         paused_pos = SCREEN_W >> 1, SCREEN_H >> 1
-        paused_rect = paused_text.get_rect(center = paused_pos)
+        paused_rect = paused_text.get_rect(center=paused_pos)
         self.surface.blit(paused_text, paused_rect)
 
         self.draw_paddles()
@@ -530,13 +583,13 @@ class Pong:
 
         pwinner_text = self.font.render(pwinner, 1, pcolor)
         pwinner_pos = SCREEN_W >> 1, SCREEN_H >> 2
-        pwinner_rect = pwinner_text.get_rect(center = pwinner_pos)
+        pwinner_rect = pwinner_text.get_rect(center=pwinner_pos)
         self.surface.blit(pwinner_text, pwinner_rect)
 
         cont = "Press any button to continue"
         cont_text = self.font_small.render(cont, 1, self.fg_color)
         cont_pos = SCREEN_W >> 1, SCREEN_H - (SCREEN_H >> 2)
-        cont_rect = cont_text.get_rect(center = cont_pos)
+        cont_rect = cont_text.get_rect(center=cont_pos)
         self.surface.blit(cont_text, cont_rect)
 
         ppaddle.center = SCREEN_W >> 1, SCREEN_H >> 1
