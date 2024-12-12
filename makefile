@@ -1,5 +1,5 @@
 .PHONY: clean build install run test
-DEFAULT: run
+DEFAULT: install 
 
 clean:
 	rm -rf dist .tox
@@ -7,7 +7,7 @@ build: clean
 	python3 -m build
 install: build
 	pipx install dist/*.tar.gz --force
-run: install
+run:
 	pong
 test: build
 	twine check dist/*
