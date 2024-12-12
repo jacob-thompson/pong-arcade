@@ -8,7 +8,7 @@ import pygame
 
 
 class Pong:
-    def __init__(self):
+    def __init__(self, lightmode=False):
         pygame.display.init()
         size = SCREEN_W, SCREEN_H
         self.surface = pygame.display.set_mode(size)
@@ -50,8 +50,11 @@ class Pong:
 
         self.running = True
 
-        self.bg_color = 255, 255, 255
-        self.fg_color = 0, 0, 0
+        self.bg_color = 0, 0, 0
+        self.fg_color = 255, 255, 255
+        if lightmode:
+            self.bg_color, self.fg_color = self.fg_color, self.bg_color
+
         self.red = 255, 0, 0
         self.blue = 0, 0, 255
 

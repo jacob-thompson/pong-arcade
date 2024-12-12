@@ -1,9 +1,13 @@
 from .pong import Pong
 
+from sys import argv
+
 from pygame import event, quit
 
+
 def main():
-    pong = Pong()
+    lightmode = len(argv) > 1
+    pong = Pong(lightmode)
 
     pong.set_window_properties()
     pong.print_info()
