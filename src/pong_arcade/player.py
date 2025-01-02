@@ -2,6 +2,7 @@ from .meta import SCREEN_W, SCREEN_H
 
 from pygame import Rect
 
+
 class Player:
     def __init__(self, number, color):
         self.id = number
@@ -16,21 +17,19 @@ class Player:
         self.score = 0
         self.winner = False
 
-    def set_color(self):
-        if self.id == 1:
-            self.color = 0, 0, 255
-        else:
-            self.color = 255, 0, 0
-
     def set_paddle_pos(self):
         distance_from_edge = self.paddle.h >> 1
         default_y = SCREEN_H >> 1
 
         if self.id == 1:
-            paddle_pos = distance_from_edge, default_y
+            x = distance_from_edge
+            y = default_y
+            paddle_pos = x, y
             self.paddle = Rect(paddle_pos, self.paddle.size)
         else:
-            paddle_pos = SCREEN_W - distance_from_edge - self.paddle.w, default_y
+            x = SCREEN_W - distance_from_edge - self.paddle.w
+            y = default_y
+            paddle_pos = x, y
             self.paddle = Rect(paddle_pos, self.paddle.size)
 
     def ensure_in_bound_top(self):

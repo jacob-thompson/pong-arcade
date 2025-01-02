@@ -71,14 +71,15 @@ class Pong:
         pygame.display.set_icon(icon)
 
     def print_info(self):
-        print("Thank you for playing Pong! https://github.com/jacob-thompson/pong-arcade")
+        link = "https://github.com/jacob-thompson/pong-arcade"
+        print(f"Thank you for playing Pong! {link}")
 
     def reset_game(self):
         self.p1.set_paddle_pos()
-        self.p1.set_color()
+        self.p1.color = self.blue
 
         self.p2.set_paddle_pos()
-        self.p2.set_color()
+        self.p2.color = self.red
 
         self.p1.reset_score()
         self.p2.reset_score()
@@ -207,7 +208,8 @@ class Pong:
             self.p1.score += 1
             self.ball.reset()
 
-            if self.opt3_selected: self.sound_score.play()
+            if self.opt3_selected:
+                self.sound_score.play()
 
             self.check_for_winner(self.p1)
 
@@ -215,7 +217,8 @@ class Pong:
             self.p2.score += 1
             self.ball.reset()
 
-            if self.opt3_selected: self.sound_score.play()
+            if self.opt3_selected:
+                self.sound_score.play()
 
             self.check_for_winner(self.p2)
 

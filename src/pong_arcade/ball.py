@@ -4,14 +4,15 @@ from random import randint
 
 from pygame import Rect
 
+
 class Ball:
     def __init__(self):
-        self.default_x = (SCREEN_W >> 1) + 10
-        self.default_y = SCREEN_H >> 1
-        self.default_ball_pos = self.default_x, self.default_y
+        default_x = (SCREEN_W >> 1) + 10
+        default_y = SCREEN_H >> 1
+        self.default_pos = default_x, default_y
 
         ball_size = 10, 10
-        self.rect = Rect(self.default_ball_pos, ball_size)
+        self.rect = Rect(self.default_pos, ball_size)
 
         self.default_speed = self.x_diff = 6
         self.y_diff = 0
@@ -23,8 +24,7 @@ class Ball:
         self.bflag_paddle = False
 
     def reset_position(self):
-        self.rect.x = self.default_x
-        self.rect.y = self.default_y
+        self.rect.x, self.rect.y = self.default_pos
 
     def reset_movement(self):
         self.x_diff = self.default_speed
@@ -43,14 +43,10 @@ class Ball:
         increment = 2
 
         if abs(self.x_diff) < self.rect.w << 1:
-            if self.x_diff > 0: self.x_diff += increment
-            else: self.x_diff -= increment
-
-    def flip_direction_horizontal(self):
-        self.x_diff = -self.x_diff
-
-    def flip_direction_vertical(self):
-        self.y_diff = -self.y_diff
+            if self.x_diff > 0:
+                self.x_diff += increment
+            else:
+                self.x_diff -= increment
 
     def get_collision_point(self, paddle):
         collision_rect = self.rect.clip(paddle)
@@ -75,16 +71,21 @@ class Ball:
 
         if collision_point < paddle.y:
             trajectory = max_t
-            if self.y_diff == 0: trajectory = -trajectory
+            if self.y_diff == 0:
+                trajectory = -trajectory
         elif collision_point in outer_top:
             trajectory = mid_t
-            if self.y_diff == 0: trajectory = -trajectory
+            if self.y_diff == 0:
+                trajectory = -trajectory
         elif collision_point in inner_top:
             trajectory = low_t
-            if self.y_diff == 0: trajectory = -trajectory
+            if self.y_diff == 0:
+                trajectory = -trajectory
         elif collision_point in center:
-            if self.y_diff == 0: trajectory = randint(-low_t, low_t)
-            else: trajectory = 0
+            if self.y_diff == 0:
+                trajectory = randint(-low_t, low_t)
+            else:
+                trajectory = 0
         elif collision_point in inner_bot:
             trajectory = low_t
         elif collision_point in outer_bot:
@@ -94,18 +95,19 @@ class Ball:
         else:
             trajectory = randint(min_t, max_t)
 
-        if self.y_diff < 0: trajectory = -trajectory
+        if self.y_diff < 0:
+            trajectory = -trajectory
 
         return trajectory
 
     def bounce_off_edges(self):
         if self.rect.clipline(self.top_edge_line) != ():
-            self.flip_direction_vertical()
+            self.y_diff = -self.y_diff
 
             self.bflag_edge = True
 
         if self.rect.clipline(self.bot_edge_line) != ():
-            self.flip_direction_vertical()
+            self.y_diff = -self.y_diff
 
             self.bflag_edge = True
 
@@ -114,7 +116,7 @@ class Ball:
             self.bflag_paddle = True
 
             self.increase_speed()
-            self.flip_direction_horizontal()
+            self.x_diff = -self.x_diff
             self.rect.x = paddle1.right + 1
 
             self.y_diff = self.trajectory(paddle1)
@@ -123,7 +125,7 @@ class Ball:
             self.bflag_paddle = True
 
             self.increase_speed()
-            self.flip_direction_horizontal()
+            self.x_diff = -self.x_diff
             self.rect.x = paddle2.left - self.rect.w - 1
 
             self.y_diff = self.trajectory(paddle2)
