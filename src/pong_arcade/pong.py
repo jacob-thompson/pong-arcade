@@ -277,10 +277,10 @@ class Pong:
     def update_ball_position(self):
         self.check_for_score()
 
-        if self.ball.bflag_edge and self.opt3_selected:
+        if self.ball.edge_flag and self.opt3_selected:
             self.sound_wall.play()
 
-        if self.ball.bflag_paddle and self.opt3_selected:
+        if self.ball.paddle_flag and self.opt3_selected:
             self.sound_paddle.play()
 
         self.ball.move(self.p1.paddle, self.p2.paddle)

@@ -20,8 +20,8 @@ class Ball:
         self.top_edge_line = 0, 0, SCREEN_W, 0
         self.bot_edge_line = 0, SCREEN_H, SCREEN_W, SCREEN_H
 
-        self.bflag_edge = False
-        self.bflag_paddle = False
+        self.edge_flag = False
+        self.paddle_flag = False
 
     def reset_position(self):
         self.rect.x, self.rect.y = self.default_pos
@@ -31,8 +31,8 @@ class Ball:
         self.y_diff = 0
 
     def reset_flags(self):
-        self.bflag_edge = False
-        self.bflag_paddle = False
+        self.edge_flag = False
+        self.paddle_flag = False
 
     def reset(self):
         self.reset_position()
@@ -104,16 +104,16 @@ class Ball:
         if self.rect.clipline(self.top_edge_line) != ():
             self.y_diff = -self.y_diff
 
-            self.bflag_edge = True
+            self.edge_flag = True
 
         if self.rect.clipline(self.bot_edge_line) != ():
             self.y_diff = -self.y_diff
 
-            self.bflag_edge = True
+            self.edge_flag = True
 
     def bounce_off_paddles(self, paddle1, paddle2):
         if self.rect.colliderect(paddle1):
-            self.bflag_paddle = True
+            self.paddle_flag = True
 
             self.increase_speed()
             self.x_diff = -self.x_diff
@@ -122,7 +122,7 @@ class Ball:
             self.y_diff = self.trajectory(paddle1)
 
         if self.rect.colliderect(paddle2):
-            self.bflag_paddle = True
+            self.paddle_flag = True
 
             self.increase_speed()
             self.x_diff = -self.x_diff
