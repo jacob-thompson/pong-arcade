@@ -257,19 +257,19 @@ class Pong:
         if keys[pygame.K_s]:
             self.p1.paddle.y += speed
 
-        one_player = self.p2.id == 0
+        single = self.p2.id == 0  # is the current game single player?
 
-        if keys[pygame.K_i] and one_player:
+        if (keys[pygame.K_i] and single) or (keys[pygame.K_UP] and single):
             self.p1.paddle.y -= speed
-        elif keys[pygame.K_i]:
+        elif keys[pygame.K_i] or keys[pygame.K_UP]:
             self.p2.paddle.y -= speed
 
-        if keys[pygame.K_k] and one_player:
+        if (keys[pygame.K_k] and single) or (keys[pygame.K_DOWN] and single):
             self.p1.paddle.y += speed
-        elif keys[pygame.K_k]:
+        elif keys[pygame.K_k] or keys[pygame.K_DOWN]:
             self.p2.paddle.y += speed
 
-        if one_player:
+        if single:
             self.ai_paddle_movement()
 
         self.ensure_boundaries()
@@ -422,41 +422,17 @@ class Pong:
 
     def draw_help_arrows(self):
         gap = 30
-        arrow_len = 100
+        px = 100
 
-        p1_up_spos = tuple(
-            self.p1.paddle.centerx,
-            self.p1.paddle.top - gap
-        )
-        p1_up_epos = tuple(
-            self.p1.paddle.centerx,
-            self.p1.paddle.top - gap - arrow_len
-        )
-        p1_down_spos = tuple(
-            self.p1.paddle.centerx,
-            self.p1.paddle.bottom + gap
-        )
-        p1_down_epos = tuple(
-            self.p1.paddle.centerx,
-            self.p1.paddle.bottom + gap + arrow_len
-        )
+        p1_up_spos = self.p1.paddle.centerx, self.p1.paddle.top - gap
+        p1_up_epos = self.p1.paddle.centerx, self.p1.paddle.top - gap - px
+        p1_down_spos = self.p1.paddle.centerx, self.p1.paddle.bottom + gap
+        p1_down_epos = self.p1.paddle.centerx, self.p1.paddle.bottom + gap + px
 
-        p2_up_spos = tuple(
-            self.p2.paddle.centerx,
-            self.p2.paddle.top - gap
-        )
-        p2_up_epos = tuple(
-            self.p2.paddle.centerx,
-            self.p2.paddle.top - gap - arrow_len
-        )
-        p2_down_spos = tuple(
-            self.p2.paddle.centerx,
-            self.p2.paddle.bottom + gap
-        )
-        p2_down_epos = tuple(
-            self.p2.paddle.centerx,
-            self.p2.paddle.bottom + gap + arrow_len
-        )
+        p2_up_spos = self.p2.paddle.centerx, self.p2.paddle.top - gap
+        p2_up_epos = self.p2.paddle.centerx, self.p2.paddle.top - gap - px
+        p2_down_spos = self.p2.paddle.centerx, self.p2.paddle.bottom + gap
+        p2_down_epos = self.p2.paddle.centerx, self.p2.paddle.bottom + gap + px
 
         self.draw_arrow(
             self.surface,
@@ -522,17 +498,17 @@ class Pong:
         skey_rect = skey_text.get_rect(center=skey_pos)
         self.surface.blit(skey_text, skey_rect)
 
-        ikey = "I"
-        ikey_text = self.font_small.render(ikey, 1, self.fg_color)
-        ikey_pos = cmdright, cmdup
-        ikey_rect = ikey_text.get_rect(center=ikey_pos)
-        self.surface.blit(ikey_text, ikey_rect)
+        upkey = "UP"
+        upkey_text = self.font_small.render(upkey, 1, self.fg_color)
+        upkey_pos = cmdright, cmdup
+        upkey_rect = upkey_text.get_rect(center=upkey_pos)
+        self.surface.blit(upkey_text, upkey_rect)
 
-        kkey = "K"
-        kkey_text = self.font_small.render(kkey, 1, self.fg_color)
-        kkey_pos = cmdright, cmddown
-        kkey_rect = kkey_text.get_rect(center=kkey_pos)
-        self.surface.blit(kkey_text, kkey_rect)
+        downkey = "DOWN"
+        downkey_text = self.font_small.render(downkey, 1, self.fg_color)
+        downkey_pos = cmdright, cmddown
+        downkey_rect = downkey_text.get_rect(center=downkey_pos)
+        self.surface.blit(downkey_text, downkey_rect)
 
         p1 = "Player 1"
         p1_text = self.font_small.render(p1, 1, self.blue)
