@@ -62,6 +62,10 @@ class Pong:
         self.p2 = Player(0, self.red)
         self.ball = Ball()
 
+        pygame.joystick.init()
+        print(pygame.joystick.get_init())
+        self.joysticks = {}
+
     def set_window_properties(self):
         pygame.display.set_caption(TITLE)
 
@@ -183,6 +187,14 @@ class Pong:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             self.menu_mouse_select(event.pos, event.button)
+
+        if event.type == pygame.JOYDEVICEADDED:
+            joystick = pygame.joystick.Joystick(event.device_index)
+            self.joysticks[joystick.get_id()] = joystick
+            print(f"Joystick {joystick.get_instance_id()} connected")
+
+        if event.type == pygame.JOYDEVICEREMOVED:
+            del self.joysticks[event.device_index]
 
     def is_winner(self):
         return self.p1.winner or self.p2.winner
